@@ -1,0 +1,18 @@
+<configuration>
+    <!-- Input Section -->
+    <input>
+        <!-- The network file -->
+        <net-file value="dach-railways.net.xml"/>
+        <!-- The routes file -->
+        <route-files value="trains.rou.xml"/>
+        <additional-files value="vehicle_types.add.xml"/>
+    </input>
+
+    <!-- Time Section -->
+    <time>
+        <!-- Simulation start and end times (24 hours in seconds) -->
+        <begin value="0"/>
+        <end value="60"/>
+    </time>
+
+</configuration>

@@ -3,3 +3,4 @@ dist/
 Outputs/
 public/LAATSimData
 public/NewSettings.json
+*.XML
