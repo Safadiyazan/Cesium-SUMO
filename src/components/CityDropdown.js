@@ -1,0 +1,24 @@
+import React, { useState } from 'react';
+import '.././css/main.css'; // Ensure this import is here
+
+const CityDropdown = ({ handleDropdownCityChange, selectedCity }) => {
+  return (
+    <div id="dropdown-city-container">
+      <span className="dropdown-city-label">Select City:</span>
+      <select id="dropdown-city" onChange={handleDropdownCityChange} value={selectedCity}>
+        <option value="NYC">NYC</option>
+        <option value="SF">SF</option>
+        <option value="PAR">PAR</option>
+        <option value="ZRH">ZRH</option>
+        <option value="NZ">NZ</option>
+        <option value="HF">HF</option>
+        <option value="DXB">DXB</option>
+        <option value="KTH">KTH</option>
+        <option value="UOM">UOM</option>
+        <option value="HER">HER</option>
+      </select>
+    </div>
+  );
+};
+
+export default CityDropdown;
