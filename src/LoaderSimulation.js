@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as Cesium from "cesium";
-import { Model, IonResource, ClockStep, ClockRange, HeadingPitchRoll, Quaternion, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
+import { Model, IonResource, ClockStep, PolylineDashMaterialProperty, ClockRange, HeadingPitchRoll, Quaternion, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import ViewerToolBar from './components/ViewerToolBar';
 import NetworkSetup from './components/NetworkSetup.js';
@@ -104,6 +104,12 @@ export async function LoadSimulation(viewer, data, city) {
             var dz0 = 300;
             var center = Cartesian3.fromDegrees(25.129820168413037, 35.333686242682596, dz0);
             break;
+        case "ZHAW":
+            var dz0 = 580;
+            var center = Cartesian3.fromDegrees(8.726615248323863, 47.49776171780695, dz0);
+        case "FRB":
+            var dz0 = 580;
+            var center = Cartesian3.fromDegrees(7.161267, 46.805565, dz0);
         // default:
         //     var dz0 = 80;
         //     var center = Cartesian3.fromDegrees(-73.98435971601633, 40.75171803897241, dz0); // NYC
@@ -169,14 +175,14 @@ export async function LoadSimulation(viewer, data, city) {
             pitch: CesiumMath.toRadians(-60.0),
             roll: CesiumMath.toRadians(0),
         };
-        // viewer.camera.flyTo({
-        //     destination: initialPosition,
-        //     orientation: {
-        //         heading: initialOrientation.heading,
-        //         pitch: initialOrientation.pitch,
-        //     },
-        //     duration: 30,
-        // });
+        viewer.camera.flyTo({
+            destination: initialPosition,
+            orientation: {
+                heading: initialOrientation.heading,
+                pitch: initialOrientation.pitch,
+            },
+            duration: 30,
+        });
         var camera = viewer.camera;
 
         // Add event listeners to track key state
@@ -2723,7 +2729,9 @@ export async function LoadSimulation(viewer, data, city) {
     const timeStepInSeconds = 1 * dtS; // for objects dt Plotting, every 00 seconds.
     const dt = timeStepInSeconds / dtS; // for importing.
     const totalSeconds = data.SimInfo.tf;//timeStepInSeconds * (tf - 1);
-    const startSim = JulianDate.fromIso8601("2024-11-30T09:30:00-04:00");
+    // const FixeStartTime = JulianDate.fromIso8601("2024-11-30T09:30:00-04:00");
+    const currentTime = Cesium.JulianDate.now();
+    const startSim = currentTime;
     const stopSim = JulianDate.addSeconds(startSim, totalSeconds, new JulianDate());
     viewer.clock.startTime = startSim.clone();
     viewer.clock.stopTime = stopSim.clone();
@@ -2734,7 +2742,6 @@ export async function LoadSimulation(viewer, data, city) {
     viewer.clock.clockRange = ClockRange.CLAMPED;
     viewer.clock.clockStep = ClockStep.SYSTEM_CLOCK_MULTIPLIER;
 
-    const currentTime = viewer.clock.currentTime;
 
     var entitiesArray = [];
     var positionPropertyArray = [];
@@ -2761,7 +2768,7 @@ export async function LoadSimulation(viewer, data, city) {
     // SUMO Data
     if (data.ObjSUMO) {
         data.ObjSUMO.forEach((ObjSUMO, index) => {
-            if ((index >= 0) & (index < 200)) {
+            if ((index >= 0) & (index < 10)) {
                 console.log("check agent no" + index);
                 const trajectoryPositions = [];
                 for (let i = 0; i < ObjSUMO.lon.length; i += dt) {
@@ -2816,6 +2823,7 @@ export async function LoadSimulation(viewer, data, city) {
         const stopAgent = new JulianDate.addSeconds(startSim, taa, new JulianDate());
         const positionProperty = new SampledPositionProperty();
         const polylinePositions = [];
+        const polylinePositionsDeg = [];
 
         // Load and sample waypoints for polyline and position property
         for (let i = 0; i < trajData.length; i++) {
@@ -2824,6 +2832,8 @@ export async function LoadSimulation(viewer, data, city) {
             const position = Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude);
             positionProperty.addSample(time, position);
             polylinePositions.push(Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude));
+            polylinePositionsDeg.push(position);
+
         }
 
         // const pointsCollection = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection());
@@ -2849,6 +2859,51 @@ export async function LoadSimulation(viewer, data, city) {
             start: startAgent,
             stop: stopAgent
         })]);
+
+
+        // Create completed path and planned path entities
+        // Callback to update completed path positions
+        const completedPathPositions = new CallbackProperty(() => {
+            const currentTime = viewer.clock.currentTime;
+            return polylinePositionsDeg.filter((_, index) => {
+                const waypointTime = JulianDate.addSeconds(startSim, index * timeStepInSeconds, new JulianDate());
+                return JulianDate.lessThanOrEquals(waypointTime, currentTime);
+            });
+        }, false);
+
+        // Callback to update planned path positions
+        const plannedPathPositions = new CallbackProperty(() => {
+            const currentTime = viewer.clock.currentTime;
+            return polylinePositionsDeg.filter((_, index) => {
+                const waypointTime = JulianDate.addSeconds(startSim, index * timeStepInSeconds, new JulianDate());
+                return JulianDate.greaterThan(waypointTime, currentTime);
+            });
+        }, false);
+
+        // Add completed path entity (solid blue line)
+        viewer.entities.add({
+            polyline: {
+                positions: completedPathPositions,
+                material: Color.BLUE,
+                width: 2,
+                clampToGround: true,
+            },
+            allowPicking: false,
+        });
+
+        // Add planned path entity (dashed black line)
+        viewer.entities.add({
+            polyline: {
+                positions: plannedPathPositions,
+                material: new PolylineDashMaterialProperty({
+                    color: Color.BLACK,
+                    dashLength: 16.0,
+                }),
+                width: 2,
+                clampToGround: true,
+            },
+            allowPicking: false,
+        });
 
         // // Create arrays to store entities for points ahead and behind
         // const entitiesBehind = [];
@@ -2939,16 +2994,16 @@ export async function LoadSimulation(viewer, data, city) {
                     AgentURLScale = 1;
                     break;
                 case 2:
-                    AgentURL = "/YS_Motorcycle.glb";
+                    AgentURL = "/YS_Motor.glb";
                     AgentURLScale = 1;
                     break;
                 case 3:
                     AgentURL = "/YS_Bus.glb";
-                    AgentURLScale = 1;
+                    AgentURLScale = 0.5;
                     break;
                 default:
-                    AgentURL = "/YS_Vehicle.glb";
-                    AgentURLScale = 1;
+                    AgentURL = "/YS_NewCar.glb";
+                    AgentURLScale = 0.25;
             }
 
             const AgentEntity = viewer.entities.add({
@@ -2978,124 +3033,124 @@ export async function LoadSimulation(viewer, data, city) {
 
 
 
-    async function AddAgentMotionOld(startSim, stopSim, timeStepInSeconds, AgentIndex, trajData, AMI, statusData, tda, taa, rs, rd, vertical, entitiesArray, positionPropertyArray) {
-        const startAgent = new JulianDate.addSeconds(startSim, tda, new JulianDate());
-        const stopAgent = new JulianDate.addSeconds(startSim, taa, new JulianDate());
-        const positionProperty = new SampledPositionProperty();
-        const polylinePositions = [];
-        const positionsUpToCurrentTime = [];
-        // Load and draw waypoints
-        for (let i = 0; i < trajData.length; i++) {
-            const dataPoint = trajData[i];
-            const time = JulianDate.addSeconds(startSim, i * timeStepInSeconds, new JulianDate());
-            const position = Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
-            positionProperty.addSample(time, position);
-            polylinePositions.push(position);
-            positionsUpToCurrentTime.push(position);
-            const validTime = JulianDate.lessThanOrEquals(time, stop);
-            const waypointEntity = viewer.entities.add({
-                name: `Agent: ${AgentIndex}, Waypoint: ${i}`,
-                description: `Location: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.height})`,
-                position: position,
-                point: {
-                    pixelSize: 5,
-                    color: Color.RED.withAlpha(1),
-                    heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
-                },
-                availability: new TimeIntervalCollection([new TimeInterval({
-                    start: startAgent,
-                    stop: validTime ? time : stopAgent
-                })]),
-                allowPicking: false,
-            });
-        }
-        // Add Aircraft safety radius
-        const SafetySphereEntity = viewer.entities.add({
-            name: `Agent: ${AgentIndex}, Safety Space`,
-            description: ``,
-            position: positionProperty,
-            ellipsoid: {
-                radii: new Cartesian3(rs, rs, rs),
-                material: Color.RED.withAlpha(0.1),
-                outline: true,
-                outlineColor: Color.BLACK.withAlpha(0.5),
-                heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
-            },
-            allowPicking: false,
-        });
-        SafetySphereEntity.availability = new TimeIntervalCollection([new TimeInterval({
-            start: startAgent,
-            stop: stopAgent
-        })]);
-        // Add SUMO Model
-        async function loadSUMOModel(positionProperty, entitiesArray, positionPropertyArray, AMI) {
-            var AgentURL = "/YS_VTOL.glb";
-            var AgentURLScale = 2;
-            switch (AMI) {
-                case 1:
-                    AgentURL = "/YS_Human.glb";
-                    AgentURLScale = 1;
-                    break;
-                case 2:
-                    AgentURL = "/YS_Motorcycle.glb";
-                    AgentURLScale = 1;
-                    break;
-                case 3:
-                    AgentURL = "/YS_Bus.glb";
-                    AgentURLScale = 1;
-                    break;
-                case 4:
-                    AgentURL = "/YS_Vehicle.glb";
-                    AgentURLScale = 1;
-                    break;
-                default:
-                    AgentURL = "/YS_Vehicle.glb";
-                    AgentURLScale = 1;
+    // async function AddAgentMotionOld(startSim, stopSim, timeStepInSeconds, AgentIndex, trajData, AMI, statusData, tda, taa, rs, rd, vertical, entitiesArray, positionPropertyArray) {
+    //     const startAgent = new JulianDate.addSeconds(startSim, tda, new JulianDate());
+    //     const stopAgent = new JulianDate.addSeconds(startSim, taa, new JulianDate());
+    //     const positionProperty = new SampledPositionProperty();
+    //     const polylinePositions = [];
+    //     const positionsUpToCurrentTime = [];
+    //     // Load and draw waypoints
+    //     for (let i = 0; i < trajData.length; i++) {
+    //         const dataPoint = trajData[i];
+    //         const time = JulianDate.addSeconds(startSim, i * timeStepInSeconds, new JulianDate());
+    //         const position = Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+    //         positionProperty.addSample(time, position);
+    //         polylinePositions.push(position);
+    //         positionsUpToCurrentTime.push(position);
+    //         const validTime = JulianDate.lessThanOrEquals(time, stop);
+    //         const waypointEntity = viewer.entities.add({
+    //             name: `Agent: ${AgentIndex}, Waypoint: ${i}`,
+    //             description: `Location: (${dataPoint.longitude}, ${dataPoint.latitude}, ${dataPoint.height})`,
+    //             position: position,
+    //             point: {
+    //                 pixelSize: 5,
+    //                 color: Color.RED.withAlpha(1),
+    //                 heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
+    //             },
+    //             availability: new TimeIntervalCollection([new TimeInterval({
+    //                 start: startAgent,
+    //                 stop: validTime ? time : stopAgent
+    //             })]),
+    //             allowPicking: false,
+    //         });
+    //     }
+    //     // Add Aircraft safety radius
+    //     const SafetySphereEntity = viewer.entities.add({
+    //         name: `Agent: ${AgentIndex}, Safety Space`,
+    //         description: ``,
+    //         position: positionProperty,
+    //         ellipsoid: {
+    //             radii: new Cartesian3(rs, rs, rs),
+    //             material: Color.RED.withAlpha(0.1),
+    //             outline: true,
+    //             outlineColor: Color.BLACK.withAlpha(0.5),
+    //             heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
+    //         },
+    //         allowPicking: false,
+    //     });
+    //     SafetySphereEntity.availability = new TimeIntervalCollection([new TimeInterval({
+    //         start: startAgent,
+    //         stop: stopAgent
+    //     })]);
+    //     // Add SUMO Model
+    //     async function loadSUMOModel(positionProperty, entitiesArray, positionPropertyArray, AMI) {
+    //         var AgentURL = "/YS_VTOL.glb";
+    //         var AgentURLScale = 2;
+    //         switch (AMI) {
+    //             case 1:
+    //                 AgentURL = "/YS_Human.glb";
+    //                 AgentURLScale = 1;
+    //                 break;
+    //             case 2:
+    //                 AgentURL = "/YS_Motorcycle.glb";
+    //                 AgentURLScale = 1;
+    //                 break;
+    //             case 3:
+    //                 AgentURL = "/YS_Bus.glb";
+    //                 AgentURLScale = 1;
+    //                 break;
+    //             case 4:
+    //                 AgentURL = "/YS_Vehicle.glb";
+    //                 AgentURLScale = 1;
+    //                 break;
+    //             default:
+    //                 AgentURL = "/YS_Vehicle.glb";
+    //                 AgentURLScale = 1;
 
-            }
-            const AgentEntity = viewer.entities.add({
-                name: `Agent: ${AgentIndex}, Model`,
-                description: ``,
-                position: positionProperty,
-                model: {
-                    // uri: AgentUri,
-                    uri: AgentURL,
-                    scale: AgentURLScale,
-                    heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN // Use or remove based on your test results
-                },
-                // path: new PathGraphics({ width: 0.2 }),
-                // orientation: calculateOrientation(positionProperty, dz1), // Use a callback for orientation
-                orientation: new VelocityOrientationProperty(positionProperty),
-                allowPicking: false,
-            });
-            AgentEntity.availability = new TimeIntervalCollection([new TimeInterval({
-                start: startAgent,
-                stop: stopAgent
-            })]);
-            entitiesArray.push(AgentEntity);
-            positionPropertyArray.push(positionProperty);
-            return entitiesArray, positionPropertyArray;
-        }
-        entitiesArray, positionPropertyArray = loadSUMOModel(positionProperty, entitiesArray, positionPropertyArray, AMI);
-    } // End Add Agent Model
+    //         }
+    //         const AgentEntity = viewer.entities.add({
+    //             name: `Agent: ${AgentIndex}, Model`,
+    //             description: ``,
+    //             position: positionProperty,
+    //             model: {
+    //                 // uri: AgentUri,
+    //                 uri: AgentURL,
+    //                 scale: AgentURLScale,
+    //                 heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN // Use or remove based on your test results
+    //             },
+    //             // path: new PathGraphics({ width: 0.2 }),
+    //             // orientation: calculateOrientation(positionProperty, dz1), // Use a callback for orientation
+    //             orientation: new VelocityOrientationProperty(positionProperty),
+    //             allowPicking: false,
+    //         });
+    //         AgentEntity.availability = new TimeIntervalCollection([new TimeInterval({
+    //             start: startAgent,
+    //             stop: stopAgent
+    //         })]);
+    //         entitiesArray.push(AgentEntity);
+    //         positionPropertyArray.push(positionProperty);
+    //         return entitiesArray, positionPropertyArray;
+    //     }
+    //     entitiesArray, positionPropertyArray = loadSUMOModel(positionProperty, entitiesArray, positionPropertyArray, AMI);
+    // } // End Add Agent Model
     // =================================================================================================================================================
     // Calribate the models
 
     // const SafetySphereEntity = viewer.entities.add({
     //     position: center,
     //     ellipsoid: {
-    //         radii: new Cartesian3(300, 300, 300),
-    //         material: Color.RED.withAlpha(0.9),
+    //         radii: new Cartesian3(600, 600, 600),
+    //         material: Color.RED.withAlpha(0.1),
     //         outline: true,
-    //         outlineColor: Color.BLACK.withAlpha(0.9),
+    //         outlineColor: Color.BLACK.withAlpha(0.5),
     //     },
     //     allowPicking: false,
     // });
 
     // // var AgentURL = "/YS_Human.glb"; // scale 1 is 1.5 m height - above center point
-    // // var AgentURL = "/YS_Motorcycle.glb"; // scale 1 is 3 m long - centered
-    // // var AgentURL = "/YS_Bus.glb"; // scale 1 is 8 m long - above center point
-    // // var AgentURL = "/YS_Vehicle.glb"; // scale 1 is 6 m long - above center point
+    // // var AgentURL = "/YS_Motor.glb"; // scale 1 is 3 m long - centered
+    // var AgentURL = "/YS_Bus.glb"; // scale 1 is 8 m long - above center point
+    // // var AgentURL = "/YS_NewCar.glb"; // scale 1 is 6 m long - above center point
     // // var AgentURL = "/YS_VTOL.glb";  // 
     // // var AgentURL = "/YS_VTOL_Medical.glb";
     // // var AgentURL = "/YS_Drone_MedicalCargo.glb";
@@ -3105,11 +3160,10 @@ export async function LoadSimulation(viewer, data, city) {
     //     position: center,
     //     model: {
     //         uri: AgentURL,
-    //         scale: 100
+    //         scale: 50
     //     },
     // });
-    // Cesium Main End
-    //};
+
 }
 
 //   // LoadSimulation(selectedFilename);

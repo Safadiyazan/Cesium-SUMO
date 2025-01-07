@@ -17,74 +17,40 @@ import './css/main.css'; // Ensure this import is here
 
 // =======================================================================================
 // Cesium Viewer Setting =================================================================
-import { IonResource, OpenStreetMapImageryProvider, ClockStep, ClockRange, HeadingPitchRoll, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
+import {IonResource, SceneMode, ImageryLayer, OpenStreetMapImageryProvider, SkyBox, WebMercatorProjection, ClockStep, ClockRange, HeadingPitchRoll, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NmYxNjYzNi1kNmQ4LTQzMGEtOGU4Ni1mN2U5OTVlYzc5MmUiLCJpZCI6MTE4MzUyLCJpYXQiOjE2ODM5MDk0OTN9.HrVvhv9eAppSV01COmDor3CGuppPz5iEEtNFeF_wzp8';
-// const viewer = new Viewer('cesiumContainer', {
+
+// const viewer = new Viewer("cesiumContainer", {
 //   terrain: Terrain.fromWorldTerrain(),
-//   imageryProvider: false,
-//   baseLayerPicker: false,
-//   selectionIndicator: false,
 // });
-// viewer.scene.pick = () => { return undefined; };
-// const tileset = viewer.scene.primitives.add(
-//   await Cesium3DTileset.fromIonAssetId(2275207)
-// );
 
-// const viewer = new Viewer('cesiumContainer', {
-//   terrain: Terrain.fromWorldTerrain(),
-//   imageryProvider: new OpenStreetMapImageryProvider({
-//     url : 'https://tile.openstreetmap.org/'
-//   }),
-// });  
-// const buildingTileset = await createOsmBuildingsAsync();
-// viewer.scene.primitives.add(buildingTileset); 
-// viewer.scene.pick = () => { return undefined; };
-
-
-// const tileset = viewer.scene.primitives.add(
-//   await Cesium.Cesium3DTileset.fromIonAssetId(75343),
-// );
-
-
-// Initialize viewer with terrain and imagery provider
-const viewer = new Viewer('cesiumContainer', {
-  terrainProvider: Terrain.fromWorldTerrain(),
-  imageryProvider: new OpenStreetMapImageryProvider({
-    url: 'https://tile.openstreetmap.org/'
-  }),
+const viewer = new Viewer("cesiumContainer", {
+  terrain: Terrain.fromWorldTerrain(),
+  baseLayerPicker: false,
+  baseLayer: new ImageryLayer(new OpenStreetMapImageryProvider({
+    url: "https://tile.openstreetmap.org/"
+  })),
 });
-
 // Load OSM Buildings asynchronously
 const buildingTileset = await createOsmBuildingsAsync();
 viewer.scene.primitives.add(buildingTileset); 
 
 // Configure the tileset for preloading and persistence
-buildingTileset.preloadFlight = true;  // Preload tiles when the camera is set to fly
-buildingTileset.preloadSiblings = true;  // Load neighboring tiles to reduce popping
-buildingTileset.preloadWhenHidden = true;  // Preload tiles even when not in view
-buildingTileset.dynamicScreenSpaceError = false;  // Keep loaded tiles persistent
-buildingTileset.maximumScreenSpaceError = 2;  // Adjust screen-space error for better performance
+// buildingTileset.preloadFlight = true;  // Preload tiles when the camera is set to fly
+// buildingTileset.preloadSiblings = true;  // Load neighboring tiles to reduce popping
+// buildingTileset.preloadWhenHidden = true;  // Preload tiles even when not in view
+// buildingTileset.dynamicScreenSpaceError = false;  // Keep loaded tiles persistent
+// buildingTileset.maximumScreenSpaceError = 2;  // Adjust screen-space error for better performance
 
 // Optional: Restrict picking to reduce overhead
 viewer.scene.pick = () => { return undefined; };
-
-// Optional: Adjust view to Zurich initially
-viewer.camera.setView({
-  destination: Cartesian3.fromDegrees(8.5417, 47.3769, 1500.0),  // Coordinates for Zurich
-  orientation: {
-    heading: 0.0,
-    pitch: -Math.PI / 4,
-    roll: 0.0
-  }
-});
-
-
+viewer.scene.globe.enableLighting = true;
 
 // =======================================================================================
 // App UI ================================================================================
 function App() {
-  
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   // useEffect(() => {
@@ -132,7 +98,7 @@ function App() {
   return (
     <div>
       <HeaderYS />
-      <Dashboard /> 
+      <Dashboard />
       {/* <FooterYS /> */}
       {/* <Router>
         <div className="d-flex flex-column min-vh-100">

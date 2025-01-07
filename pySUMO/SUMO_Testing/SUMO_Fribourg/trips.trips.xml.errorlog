@@ -1,0 +1,14 @@
+Warning: At actuated tlLogic 'cluster_241635107_2511160266_2511160267_2511160268_#2more', actuated phase 2 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_241635107_2511160266_2511160267_2511160268_#2more', linkIndex 0,1,2,3,4 has no controlling detector.
+Warning: busStop '6703857801' on lane '744486459#2_0' is too short for vehicle '0_bus_544:0'.
+Warning: busStop '983851080' on lane '1177568244#0_0' is too short for vehicle '16_bus_9:1'.
+Warning: Teleporting vehicle '26_bus_233:0'; waited too long (yield), lane='184747026#1_0', time=681.00.
+Warning: Vehicle '26_bus_233:0' ends teleporting on edge '744486459#2', time=684.00.
+Warning: Teleporting vehicle '18_bus_123:0'; waited too long (jam), lane='-184762429#3_0', time=869.00.
+Warning: Vehicle '18_bus_123:0' ends teleporting on edge '-931454892', time=869.00.
+Warning: Teleporting vehicle '70_train_S20:0'; waited too long (yield), lane='-998404402#2_0', time=896.00.
+Warning: Teleporting vehicle '7_bus_8:2'; waited too long (jam), lane='-713142602#1_0', time=898.00.
+Warning: Vehicle '7_bus_8:2' ends teleporting on edge '-52072574#1', time=898.00.
+Warning: Vehicle '70_train_S20:0' ends teleporting on edge '-25861010#2', time=899.00.
+Warning: Teleporting vehicle '68_train_S21:0'; waited too long (yield), lane='-18594309#1_0', time=906.00.
+Warning: Vehicle '68_train_S21:0' ends teleporting on edge '-18594309#0', time=906.00.

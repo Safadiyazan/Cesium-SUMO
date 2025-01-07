@@ -11,14 +11,16 @@ print(date_time)
 print('===========================')
 print('Export XML to JSON Process')
 
+NetworkName = 'SUMO_Fribourg'
+
 # Load the coordinate transformation
 print('Loading Network Coordination')
-net = sumolib.net.readNet('./pySUMO/SUMO_Testing/ZurichNetwork/osm.net.xml.gz')
+net = sumolib.net.readNet(f'./pySUMO/SUMO_Testing/{NetworkName}/osm.net.xml.gz')
 projection = net.getLocationOffset()
 
 print('Loading XML')
 # Parse the XML file
-tree = ET.parse('./pySUMO/SUMO_Testing/ZurichNetwork/SUMO_trajectories_ZRH.xml')
+tree = ET.parse(f'./pySUMO/SUMO_Testing/{NetworkName}/SUMO_trajectories.xml')
 root = tree.getroot()
 
 # Dictionary to store agent data over time
@@ -48,7 +50,7 @@ for timestep in root.findall('timestep'):
                 agent_rs = 1.5
             elif agent_id.startswith('bus') or agent_id.startswith('pt'):
                 agent_AMI = 3
-                agent_rs = 4
+                agent_rs = 9
             elif agent_id.startswith('veh'):
                 agent_AMI = 4
                 agent_rs = 3
@@ -114,9 +116,26 @@ Data = {
 }
 
 # Write to a JSON file
-jsonfilename = f'./public/Outputs/agent_trajectories_{date_time}.json'
+jsonfilename = f'./public/Outputs/agent_trajectories_{NetworkName}_{date_time}.json'
 
 with open(jsonfilename, 'w') as json_file:
     json.dump(Data, json_file, indent=4)
 
 print(f"Agent trajectory data with longitude and latitude has been exported to {jsonfilename}")
+
+print('===========================\nBegin Debugging\n===========================')
+print(f"Parsed XML Root: {root.tag}")
+print(f"Processing up to {max_agents} agents within timesteps < 600 seconds.")
+
+for timestep in root.findall('timestep'):
+    time = float(timestep.get('time'))
+    print(f"Processing Timestep: {time}")
+    for agent in timestep.findall('person') + timestep.findall('vehicle'):
+        agent_id = agent.get('id')
+        print(f"  Found Agent ID: {agent_id}")
+
+        # Additional Debug Info
+        x, y = agent.get('x'), agent.get('y')
+        if x and y:
+            print(f"  Position: x={x}, y={y}")
+

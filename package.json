@@ -21,7 +21,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.2",
-    "cesium": "^1.123.0",
+    "cesium": "^1.125.0",
     "connect-history-api-fallback": "^2.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "cors": "^2.8.5",

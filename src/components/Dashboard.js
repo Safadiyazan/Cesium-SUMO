@@ -128,7 +128,7 @@ const Dashboard = () => {
             });
     }, [selectedFile]);  // Dependency array ensures this effect runs when selectedFile changes
 
-    const [selectedCity, setSelectedCity] = useState("ZRH");
+    const [selectedCity, setSelectedCity] = useState("FRB");
     useEffect(() => {
         // LoadSimulation(viewer, selectedFile, selectedCity);
         // Fetch initial data when the component mounts
