@@ -14,7 +14,7 @@ const HeaderYS = ({ isAuthenticated, onLoginButtonClick, username, onLogout }) =
           height="50"
           className="d-inline-block align-center"
         />{' '}
-        Testing SUMO Cesium Integration - Cesium Ecosystem Grant{' '}
+        Testing CesiumJS - LAAT Flow Simulation - SUMO Integration: Air Rail Research Statment - Yazan Safadi {' '}
         {/* <small><sub>&copy; 2024 Yazan Safadi, All rights reserved.</sub></small> */}
       </Navbar.Brand>
     </Navbar>

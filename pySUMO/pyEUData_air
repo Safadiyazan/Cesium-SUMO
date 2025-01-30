@@ -1,0 +1,47 @@
+import pandas as pd
+import json
+
+# Load the CSV file
+csv_file = './pySUMO/data_eu_air_lat_lng.csv'  # Replace with your actual CSV file name
+data = pd.read_csv(csv_file)
+
+# Function to validate latitude and longitude
+def is_valid_coordinate(lat, lng):
+    return -90 <= lat <= 90 and -180 <= lng <= 180 and lat != 0 and lng != 0
+
+# Initialize a list to store valid routes
+routes_json = []
+
+# Iterate over each row in the DataFrame
+for _, row in data.iterrows():
+    # Extract coordinates and names
+    lat_origin = row["lat origin airport"]
+    lng_origin = row["long origin airport"]
+    lat_destination = row["lat destination airport"]
+    lng_destination = row["long destination airport"]
+    origin_name = row["origin airport"]
+    destination_name = row["destination airport"]
+    
+    # Check if all coordinates are valid
+    if (is_valid_coordinate(lat_origin, lng_origin) and 
+        is_valid_coordinate(lat_destination, lng_destination)):
+        # Add the route to the JSON list
+        routes_json.append({
+            "origin": {
+                "lat": lat_origin,
+                "lng": lng_origin,
+                "name": origin_name
+            },
+            "destination": {
+                "lat": lat_destination,
+                "lng": lng_destination,
+                "name": destination_name
+            }
+        })
+
+# Save the filtered routes as a JSON file
+json_file = './pySUMO/routes_filtered.json'
+with open(json_file, 'w') as f:
+    json.dump(routes_json, f, indent=4)
+
+print(f"Filtered JSON file saved as {json_file}")
