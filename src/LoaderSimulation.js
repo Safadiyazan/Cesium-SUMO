@@ -1818,6 +1818,10 @@ export async function LoadSimulation(viewer, data, city) {
                     AgentURL = "/YS_Bus.glb";
                     AgentURLScale = 0.5;
                     break;
+                case 5:
+                    AgentURL = "/YS_Train.glb";
+                    AgentURLScale = 0.5;
+                    break;
                 default:
                     AgentURL = "/YS_NewCar.glb";
                     AgentURLScale = 0.25;
@@ -1848,80 +1852,79 @@ export async function LoadSimulation(viewer, data, city) {
         await loadSUMOModel(positionProperty, entitiesArray, positionPropertyArray, AMI);
     } // End Add Agent Model
     // =================================================================================================================================================
-    // Load OD of train and airlines
-    const cesiumAirRed = Cesium.Color.fromCssColorString('#E03C31');
-    const cesiumAirBlue = Cesium.Color.fromCssColorString('#00A6D6');
+    function LoadAirRailData() {
+        // Load OD of train and airlines
+        const cesiumAirRed = Cesium.Color.fromCssColorString('#E03C31');
+        const cesiumAirBlue = Cesium.Color.fromCssColorString('#00A6D6');
 
-    // Approximate speed of a commercial aircraft in km/h
-    const flightSpeedKmPerHour = 300; // 900 km/h
-    const maxDistanceKmForShortFlight = flightSpeedKmPerHour * (2.5); // Distance for a 2.5-hour flight
+        // Approximate speed of a commercial aircraft in km/h
+        const flightSpeedKmPerHour = 300; // 900 km/h
+        const maxDistanceKmForShortFlight = flightSpeedKmPerHour * (2.5); // Distance for a 2.5-hour flight
 
-    // Load the air JSON file
-    fetch('/data_routes_air.json')
-        .then((response) => response.json())
-        .then((data_routes_air) => {
-            // Limit the number of routes for testing
-            // const limitedRoutes = data_routes_air.slice(0, 10000); // Adjust the number of routes as needed
+        // Load the air JSON file
+        fetch('/data_routes_air.json')
+            .then((response) => response.json())
+            .then((data_routes_air) => {
+                // Limit the number of routes for testing
+                // const limitedRoutes = data_routes_air.slice(0, 10000); // Adjust the number of routes as needed
 
-            data_routes_air.forEach((route) => {
-                const { origin, destination } = route;
+                data_routes_air.forEach((route) => {
+                    const { origin, destination } = route;
 
-                var distance = Cartesian3.distance(Cesium.Cartesian3.fromDegrees(origin.lng, origin.lat), Cesium.Cartesian3.fromDegrees(destination.lng,destination.lat)) / 1000;
-                // console.log("Distance between points: " + distance + "km more than " + maxDistanceKmForShortFlight + "km");
-                // if (distance > maxDistanceKmForShortFlight) {
-                //     console.log("Distance between points: " + distance + "km less than " + maxDistanceKmForShortFlight + "km");
-                // }
-                        
-                // Determine color based on flight distance
-                const lineColor =
-                distance <= maxDistanceKmForShortFlight
-                        ? cesiumAirRed.withAlpha(0.5)
-                        : cesiumAirBlue.withAlpha(0.1);
+                    var distance = Cartesian3.distance(Cesium.Cartesian3.fromDegrees(origin.lng, origin.lat), Cesium.Cartesian3.fromDegrees(destination.lng, destination.lat)) / 1000;
+                    // console.log("Distance between points: " + distance + "km more than " + maxDistanceKmForShortFlight + "km");
+                    // if (distance > maxDistanceKmForShortFlight) {
+                    //     console.log("Distance between points: " + distance + "km less than " + maxDistanceKmForShortFlight + "km");
+                    // }
 
-                // Plot a line between origin and destination
-                viewer.entities.add({
-                    polyline: {
-                        positions: Cesium.Cartesian3.fromDegreesArray([
-                            origin.lng,
-                            origin.lat,
+                    // Determine color based on flight distance
+                    const lineColor =
+                        distance <= maxDistanceKmForShortFlight
+                            ? cesiumAirRed.withAlpha(0.5)
+                            : cesiumAirBlue.withAlpha(0.1);
+
+                    // Plot a line between origin and destination
+                    viewer.entities.add({
+                        polyline: {
+                            positions: Cesium.Cartesian3.fromDegreesArray([
+                                origin.lng,
+                                origin.lat,
+                                destination.lng,
+                                destination.lat,
+                            ]),
+                            width: 0.2,
+                            material: new Cesium.PolylineDashMaterialProperty({
+                                color: lineColor,
+                                dashLength: 50.0,
+                            }),
+                        },
+                    });
+
+                    // Add a point for the origin
+                    viewer.entities.add({
+                        position: Cesium.Cartesian3.fromDegrees(origin.lng, origin.lat),
+                        point: {
+                            pixelSize: 2,
+                            material: Cesium.Color.BLACK.withAlpha(0.4),
+                        },
+                    });
+
+                    // Add a point for the destination
+                    viewer.entities.add({
+                        position: Cesium.Cartesian3.fromDegrees(
                             destination.lng,
-                            destination.lat,
-                        ]),
-                        width: 0.2,
-                        material: new Cesium.PolylineDashMaterialProperty({
-                            color: lineColor,
-                            dashLength: 50.0,
-                        }),
-                    },
+                            destination.lat
+                        ),
+                        point: {
+                            pixelSize: 2,
+                            material: Cesium.Color.BLACK.withAlpha(0.4),
+                        },
+                    });
                 });
 
-                // Add a point for the origin
-                viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(origin.lng, origin.lat),
-                    point: {
-                        pixelSize: 2,
-                        material: Cesium.Color.BLACK.withAlpha(0.4),
-                    },
-                });
-
-                // Add a point for the destination
-                viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(
-                        destination.lng,
-                        destination.lat
-                    ),
-                    point: {
-                        pixelSize: 2,
-                        material: Cesium.Color.BLACK.withAlpha(0.4),
-                    },
-                });
-            });
-
-            console.log('Loaded air routes:', data_routes_air);
-        })
-        .catch((error) => console.error('Error loading routes:', error));
-
-
+                console.log('Loaded air routes:', data_routes_air);
+            })
+            .catch((error) => console.error('Error loading routes:', error));
     // // Load the train JSON file
     // fetch('/data_routes_train.json')
     // .then(response => response.json())
@@ -2002,11 +2005,7 @@ export async function LoadSimulation(viewer, data, city) {
     //         console.log("Camera fly-to completed!");
     //     }
     // });
-
-
-
-
-
+    } // End Load EU Air Rail Data
     // ================================================================================================================================================= 
     // =================================================================================================================================================
     // Calribate the models

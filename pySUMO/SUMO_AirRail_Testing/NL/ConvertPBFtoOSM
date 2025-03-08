@@ -1,0 +1,13 @@
+# pip install osmium
+# osmium cat C:\DEV\Cesium-SUMO\pySUMO\SUMO_AirRail_Testing\NL\netherlands-latest.osm.pbf -o C:\DEV\Cesium-SUMO\pySUMO\SUMO_AirRail_Testing\NL\netherlands-latest.osm
+
+import osmium
+
+# Define the input and output file
+input_pbf = "C:/DEV/Cesium-SUMO/pySUMO/SUMO_AirRail_Testing/NL/netherlands-latest.osm.pbf"
+output_osm = "C:/DEV/Cesium-SUMO/pySUMO/SUMO_AirRail_Testing/NL/netherlands-latest.osm"
+
+# Convert the PBF to OSM XML
+osmium.osm_convert(input_pbf, output_osm)
+
+print(f"Converted {input_pbf} to {output_osm}")

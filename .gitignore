@@ -5,3 +5,5 @@ public/LAATSimData
 public/NewSettings.json
 *.XML
 *.osm
+*.pbf
+*.gz
