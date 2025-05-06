@@ -10,7 +10,7 @@ import './css/main.css'; // Ensure this import is here
 // Cesium Simulation
 // =================================================================================================================================================
 
-export async function LoadSimulation(viewer, data, city) {
+export async function LoadSimulation(viewer, data, dataSUMO1, dataSUMO2, dataSUMO3, city) {
     try {
         viewer.entities.removeAll();
     } catch (error) {
@@ -53,6 +53,14 @@ export async function LoadSimulation(viewer, data, city) {
     // Center point
     switch (city) {
         case "NYC":
+            if ((data.Settings.Airspace.Vertiports !== undefined) && (data.Settings.Airspace.Vertiports === 1)) {
+                var dz0 = 0;
+            } else {
+                var dz0 = 480;
+            }
+            var center = Cartesian3.fromDegrees(-73.98435971601633, 40.75171803897241, dz0); // NYC
+            break;
+        case "NAU":
             if ((data.Settings.Airspace.Vertiports !== undefined) && (data.Settings.Airspace.Vertiports === 1)) {
                 var dz0 = 0;
             } else {
@@ -149,7 +157,7 @@ export async function LoadSimulation(viewer, data, city) {
     // createCustomControls(viewer);
     var randomNumberVerti = 0;
     ///////////////////////////////////////////////////////////////////////////////////////
-    // ViewSetting(center, NavigationOn);
+    ViewSetting(center, NavigationOn);
     function ViewSetting(center, NavigationOn) {
         viewer.scene.globe.enableLighting = true; // Enable lighting for the sun and shadows
         viewer.shadows = true; // Enable shadows
@@ -250,24 +258,24 @@ export async function LoadSimulation(viewer, data, city) {
                 while ((counterWhile < 100) && (FindEntity)) {
                     if ((viewer.clock.currentTime > entitiesArray[randomNumber].availability.start) && (viewer.clock.currentTime < entitiesArray[randomNumber].availability.stop)) {
                         viewer.trackedEntity = entitiesArray[randomNumber];
-                        viewer.clock.onTick.addEventListener((clock) => {
-                            try {
-                                if ((viewer.clock.currentTime > entitiesArray[randomNumber].availability.start) && (viewer.clock.currentTime < entitiesArray[randomNumber].availability.stop)) {
-                                    const cartographic = Cartographic.fromCartesian(positionPropertyArray[randomNumber].getValue(viewer.clock.currentTime));
-                                    const formattedTime = new Date(viewer.clock.currentTime);
-                                    const time0 = entitiesArray[randomNumber].availability.start;
-                                    const time2 = viewer.clock.currentTime;
-                                    const position0 = positionPropertyArray[randomNumber].getValue(time0);
-                                    const position2 = positionPropertyArray[randomNumber].getValue(time2);
-                                    const distance = Cartesian3.distance(position0, position2);
-                                    const timeDifference = JulianDate.secondsDifference(time2, time0);
-                                    const speed = distance / timeDifference;
-                                }
-                            } catch (error) {
-                                console.log(`Error loading ${error}`);
-                            }
-                            ;
-                        });
+                        // viewer.clock.onTick.addEventListener((clock) => {
+                        //     try {
+                        //         if ((viewer.clock.currentTime > entitiesArray[randomNumber].availability.start) && (viewer.clock.currentTime < entitiesArray[randomNumber].availability.stop)) {
+                        //             const cartographic = Cartographic.fromCartesian(positionPropertyArray[randomNumber].getValue(viewer.clock.currentTime));
+                        //             const formattedTime = new Date(viewer.clock.currentTime);
+                        //             const time0 = entitiesArray[randomNumber].availability.start;
+                        //             const time2 = viewer.clock.currentTime;
+                        //             const position0 = positionPropertyArray[randomNumber].getValue(time0);
+                        //             const position2 = positionPropertyArray[randomNumber].getValue(time2);
+                        //             const distance = Cartesian3.distance(position0, position2);
+                        //             const timeDifference = JulianDate.secondsDifference(time2, time0);
+                        //             const speed = distance / timeDifference;
+                        //         }
+                        //     } catch (error) {
+                        //         console.log(`Error loading ${error}`);
+                        //     }
+                        //     ;
+                        // });
 
                         FindEntity = 0;
                     } else {
@@ -535,16 +543,20 @@ export async function LoadSimulation(viewer, data, city) {
         const startAircraft = new JulianDate.addSeconds(startSim, tda, new JulianDate());
         const stopAircraft = new JulianDate.addSeconds(startSim, taa, new JulianDate());
         const positionProperty = new SampledPositionProperty();
+        const positionSpeedSignProperty = new SampledPositionProperty();
         const polylinePositions = [];
-        const positionsUpToCurrentTime = [];
+        const polylinePositionsDeg = [];
         // Load and draw waypoints
         for (let i = 0; i < flightData.length; i++) {
             const dataPoint = flightData[i];
             const time = JulianDate.addSeconds(startSim, i * timeStepInSeconds, new JulianDate());
             const position = Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
             positionProperty.addSample(time, position);
+            const positionSpeedSign = Cartesian3.fromDegrees(dataPoint.longitude, dataPoint.latitude, dataPoint.height);
+            const adjusted_positionSpeedSign = computeNewPoint(positionSpeedSign, 0, 0, 2 * rs);
+            positionSpeedSignProperty.addSample(time, adjusted_positionSpeedSign);
             polylinePositions.push(position);
-            positionsUpToCurrentTime.push(position);
+            polylinePositionsDeg.push(position);
             const validTime = JulianDate.lessThanOrEquals(time, stop);
             const waypointEntity = viewer.entities.add({
                 name: `Aircraft: ${AircraftIndex}, Waypoint: ${i}`,
@@ -553,7 +565,6 @@ export async function LoadSimulation(viewer, data, city) {
                 point: {
                     pixelSize: 2,
                     color: Color.DARKGRAY.withAlpha(0.5),
-                    //markerSymbol: 'X'
                 },
                 availability: new TimeIntervalCollection([new TimeInterval({
                     start: startAircraft,
@@ -569,7 +580,7 @@ export async function LoadSimulation(viewer, data, city) {
             polyline: {
                 positions: polylinePositions,
                 material: Color.DARKGRAY.withAlpha(0.4),
-                width: 1,
+                width: 5,
             },
             allowPicking: false,
         });
@@ -577,21 +588,7 @@ export async function LoadSimulation(viewer, data, city) {
             start: startAircraft,
             stop: stopAircraft
         })]);
-        // Draw shortest path
-        // const pathShortEntity = viewer.entities.add({
-        //     name: `Aircraft: ${AircraftIndex}, Waypoint Path`,
-        //     polyline: {
-        //         positions: [Cartesian3.fromDegrees(flightData[0].longitude, flightData[0].latitude, flightData[0].height),
-        //         Cartesian3.fromDegrees(flightData[flightData.length - 1].longitude, flightData[flightData.length - 1].latitude, flightData[flightData.length - 1].height)],
-        //         material: Color.GREEN.withAlpha(0.5),
-        //         width: 1.5,
-        //     },
-        //     allowPicking: false,
-        // });
-        // pathShortEntity.availability = new TimeIntervalCollection([new TimeInterval({
-        //     start: startAircraft,
-        //     stop: stopAircraft
-        // })]);
+
         // Add origin entity
         const oA = flightData[0];
         const oAEntity = viewer.entities.add({
@@ -620,53 +617,58 @@ export async function LoadSimulation(viewer, data, city) {
             },
             allowPicking: false,
         });
-        // Add travelled path until specific time
-        const traveledPathEntity = viewer.entities.add({
-            polyline: {
-                name: `Aircraft: ${AircraftIndex}, Path`,
-                description: ``,
-                positions: new CallbackProperty(function () {
-                    const currentTime = viewer.clock.currentTime;
-                    const currentElapsedTime = JulianDate.secondsDifference(currentTime, startSim);
-                    const currentIteration = Math.floor(currentElapsedTime / timeStepInSeconds);
 
-                    // Ensure the current iteration is within the bounds of the polylinePositions array
-                    if (currentIteration < 0 || currentIteration >= polylinePositions.length) {
-                        return [];
-                    }
-                    return polylinePositions.slice(0, currentIteration + 1);
-                }, false),
-                width: 2,
-                material: Color.BLUE.withAlpha(0.4),
-                allowPicking: false,
-            }
+        // Create completed path and planned path entities
+        // Callback to update completed path positions
+        const completedPathPositions = new CallbackProperty(() => {
+            const currentTime = viewer.clock.currentTime;
+            return polylinePositionsDeg.filter((_, index) => {
+                const waypointTime = JulianDate.addSeconds(startSim, index * timeStepInSeconds, new JulianDate());
+                return JulianDate.lessThanOrEquals(waypointTime, currentTime);
+            });
+        }, false);
+
+        // Callback to update planned path positions
+        const plannedPathPositions = new CallbackProperty(() => {
+            const currentTime = viewer.clock.currentTime;
+            return polylinePositionsDeg.filter((_, index) => {
+                const waypointTime = JulianDate.addSeconds(startSim, index * timeStepInSeconds, new JulianDate());
+                return JulianDate.greaterThan(waypointTime, currentTime);
+            });
+        }, false);
+
+        // Add completed path entity
+        const completed_path_entity = viewer.entities.add({
+            polyline: {
+                positions: completedPathPositions,
+                material: Color.DARKBLUE.withAlpha(0.4),
+                width: 3,
+            },
+            allowPicking: false,
         });
 
-        traveledPathEntity.availability = new TimeIntervalCollection([new TimeInterval({
+        completed_path_entity.availability = new TimeIntervalCollection([new TimeInterval({
             start: startAircraft,
             stop: stopAircraft
         })]);
 
-        traveledPathEntity.distanceDisplayCondition = new DistanceDisplayCondition(
-            0.0,
-            45.5
-        );
-        // Add Aircraft safety radius
-        // const SafetySphereEntity = viewer.entities.add({
-        //     name: `Aircraft: ${AircraftIndex}, Safety Space`,
-        //     description: ``,
-        //     position: positionProperty,
-        //     ellipsoid: {
-        //         radii: new Cesium.CallbackProperty(function (time, result) {
-        //             const randomScaleFactor = 2 * Math.random();  // Adjusts the scale randomly between 0 and 2
-        //             return new Cesium.Cartesian3(rs * randomScaleFactor, rs * randomScaleFactor, rs * randomScaleFactor);
-        //         }, false), // 'false' means it is not constant and should be recalculated over time
-        //         material: Cesium.Color.RED.withAlpha(0.1),
-        //         outline: true,
-        //         outlineColor: Cesium.Color.BLACK.withAlpha(0.2),
-        //     },
-        //     allowPicking: false,
-        // });
+        // Add planned path entity
+        const planned_path_entity = viewer.entities.add({
+            polyline: {
+                positions: plannedPathPositions,
+                material: new PolylineDashMaterialProperty({
+                    color: Color.DARKRED.withAlpha(0.4),
+                    dashLength: 8.0,
+                }),
+                width: 3,
+            },
+            allowPicking: false,
+        });
+
+        planned_path_entity.availability = new TimeIntervalCollection([new TimeInterval({
+            start: startAircraft,
+            stop: stopAircraft
+        })]);
 
         // Add Aircraft safety radius
         const SafetySphereEntity = viewer.entities.add({
@@ -717,7 +719,6 @@ export async function LoadSimulation(viewer, data, city) {
 
             var AircraftURL = "/YS_VTOL.glb";
             var AircraftURLScale = 2;
-            // var AircraftModelIndex = Math.floor(Math.random() * 4) + 1;
             switch (AMI) {
                 case 1:
                     AircraftURL = "/YS_VTOL_Medical.glb";
@@ -747,13 +748,12 @@ export async function LoadSimulation(viewer, data, city) {
                 description: ``,
                 position: positionProperty,
                 model: {
-                    // uri: airplaneUri,
                     uri: AircraftURL,
                     scale: AircraftURLScale
                 },
                 path: new PathGraphics({ width: 0.2 }),
-                orientation: calculateOrientation(positionProperty, dz1), // Use a callback for orientation
-                // orientation: new VelocityOrientationProperty(positionProperty),
+                orientation: calculateOrientation(positionProperty, dz1), // Use a callback for orientation // TODO: FIX ISSUE
+                // orientation: new VelocityOrientationProperty(positionProperty), // TODO: FIX ISSUE
                 allowPicking: false,
             });
             airplaneEntity.availability = new TimeIntervalCollection([new TimeInterval({
@@ -769,90 +769,22 @@ export async function LoadSimulation(viewer, data, city) {
             return entitiesArray, positionPropertyArray;
         }
 
-        // function calculateOrientation(positionProperty, takeoffAltitudeThreshold) {
-        //     const velocityOrientation = new Cesium.VelocityOrientationProperty(positionProperty);
-
-        //     return new Cesium.CallbackProperty(function (time, result) {
-        //         // Get the current position and velocity
-        //         try {
-        //             const currentPosition = positionProperty.getValue(time);
-        //             const cartographic = Cartographic.fromCartesian(positionProperty.getValue(time));
-        //             const altitude = cartographic.height;
-        //             console.log('dz1' + takeoffAltitudeThreshold)
-        //             console.log('Altitude' + altitude)
-        //         }
-        //         catch (err) {
-        //             return new VelocityOrientationProperty(positionProperty);
-        //         }
-
-        //         // if (altitude < takeoffAltitudeThreshold) {
-        //         //     console.log('dz1' + takeoffAltitudeThreshold)
-        //         //     console.log('Altitude' + altitude)
-        //         //     if (!currentPosition) {
-        //         //         return result;
-        //         //     }
-
-        //         //     // Use velocity orientation for normal flight
-        //         //     const currentOrientation = velocityOrientation.getValue(time);
-        //         //     if (!currentOrientation) {
-        //         //         return result;
-        //         //     }
-
-        //         //     // Convert the quaternion to HeadingPitchRoll (HPR)
-        //         //     const hpr = Cesium.HeadingPitchRoll.fromQuaternion(currentOrientation);
-
-        //         //     // Handle special case for takeoff and landing when aircraft is near the ground (altitude threshold)
-
-        //         //     // Force aircraft to have a steep pitch for vertical takeoff/landing
-        //         //     hpr.pitch = Cesium.Math.toRadians(0);  // Adjust to straight up or down
-        //         //     hpr.roll = 0;  // Keep roll zero to avoid weird banking during takeoff/landing
-
-
-        //         //     // Convert the adjusted HPR back to a quaternion
-        //         //     return Cesium.Transforms.headingPitchRollQuaternion(
-        //         //         currentPosition,
-        //         //         hpr,
-        //         //     );
-        //         // }
-        //         // else {
-        //         return new VelocityOrientationProperty(positionProperty);
-        //         // }
-        //     }, false);
-        // }
-
-
-
-
-
-
-        // WORKING FOR NYC!!!!!!!!!!!!!!!!!!!
+        // KNOWN ISSUES WORKING FOR NYC ONLY TODO: Fix Function
         function calculateOrientation(positionProperty) {
             const velocityOrientation = new VelocityOrientationProperty(positionProperty, Ellipsoid.WGS84);
 
             return new CallbackProperty(function (time, result) {
-                // Get the velocity-based orientation (which is a quaternion)
                 const currentOrientation = velocityOrientation.getValue(time);
                 if (!currentOrientation) {
                     return result;
                 }
-
-                // Convert the current orientation from quaternion to HeadingPitchRoll (HPR)
                 const hpr = HeadingPitchRoll.fromQuaternion(currentOrientation);
-
-                // Set limits for pitch, heading, and roll
-                const maxPitch = CesiumMath.toRadians(10);  // Limit max pitch (e.g., vertical takeoff/landing)
-                const minPitch = CesiumMath.toRadians(-10); // Limit min pitch (downward during landing)
-                const maxRoll = CesiumMath.toRadians(2);   // Limit max roll (e.g., banking during turns)
-                const minRoll = CesiumMath.toRadians(-2);   // Limit max roll (e.g., banking during turns)
-
-                // Constrain the pitch
+                const maxPitch = CesiumMath.toRadians(10);
+                const minPitch = CesiumMath.toRadians(-10);
+                const maxRoll = CesiumMath.toRadians(2);
+                const minRoll = CesiumMath.toRadians(-2);
                 hpr.pitch = CesiumMath.clamp(hpr.pitch, minPitch, maxPitch);
-
-                // Constrain the roll
                 hpr.roll = CesiumMath.clamp(hpr.roll, minRoll, maxRoll);
-
-                // const fixedFrameTransform = Cesium.Transforms.localFrameToFixedFrameGenerator("north", "west");
-                // Convert the constrained HPR back into a quaternion
                 return Transforms.headingPitchRollQuaternion(
                     positionProperty.getValue(time),
                     hpr,
@@ -860,11 +792,6 @@ export async function LoadSimulation(viewer, data, city) {
                 );
             }, false);
         }
-
-
-
-
-
 
         entitiesArray, positionPropertyArray = loadModel(positionProperty, entitiesArray, positionPropertyArray, AMI);
 
@@ -1368,6 +1295,9 @@ export async function LoadSimulation(viewer, data, city) {
             case "NYC":
                 var FetchVertiportFileName = '/FixedVertiportsSettings_V2_NYC.json';
                 break;
+            case "NAU":
+                var FetchVertiportFileName = '/FixedVertiportsSettings_V1_NYC_Archer_United.json';
+                break;
             case "PAR":
                 var FetchVertiportFileName = '/FixedVertiportsSettings_V1_PAR.json';
                 break;
@@ -1667,7 +1597,7 @@ export async function LoadSimulation(viewer, data, city) {
     // Aircraft Data
     if (data.ObjAircraft) {
         data.ObjAircraft.forEach((ObjAircraft, index) => {
-            if ((index >= 0) & (index < 100)) {
+            if ((index >= 0) & (index < 10)) {
                 //const startAircraft = new JulianDate.addSeconds(startSim, ObjAircraft.tda, new JulianDate());
                 //const stopAircraft = new JulianDate.addSeconds(startSim, ObjAircraft.taa, new JulianDate());
                 const trajectoryPositions = [];
@@ -1685,9 +1615,9 @@ export async function LoadSimulation(viewer, data, city) {
     }
 
     // SUMO Data
-    if (data.ObjSUMO) {
-        data.ObjSUMO.forEach((ObjSUMO, index) => {
-            if ((index >= 0) & (index < 10)) {
+    if (dataSUMO1.ObjSUMO) {
+        dataSUMO1.ObjSUMO.forEach((ObjSUMO, index) => {
+            if ((index >= 0) & (index < 0)) {
                 console.log("check agent no" + index);
                 const trajectoryPositions = [];
                 for (let i = 0; i < ObjSUMO.lon.length - 1; i += dt) {
@@ -1701,6 +1631,41 @@ export async function LoadSimulation(viewer, data, city) {
             }
         });
     }
+
+    if (dataSUMO2.ObjSUMO) {
+        dataSUMO2.ObjSUMO.forEach((ObjSUMO, index) => {
+            if ((index >= 0) & (index < 30)) {
+                console.log("check agent no" + index);
+                const trajectoryPositions = [];
+                for (let i = 0; i < ObjSUMO.lon.length - 1; i += dt) {
+                    trajectoryPositions.push({
+                        longitude: ObjSUMO.lon[i],
+                        latitude: ObjSUMO.lat[i],
+                        height: dz0
+                    });
+                } // IF INDEX END
+                AddAgentMotion(startSim, stopSim, timeStepInSeconds, index + 1, trajectoryPositions, ObjSUMO.AMI, ObjSUMO.status, ObjSUMO.tda, ObjSUMO.taa, ObjSUMO.rs, ObjSUMO.rd, 0, entitiesArray, positionPropertyArray);
+            }
+        });
+    }
+
+    if (dataSUMO3.ObjSUMO) {
+        dataSUMO3.ObjSUMO.forEach((ObjSUMO, index) => {
+            if ((index >= 0) & (index < 0)) {
+                console.log("check agent no" + index);
+                const trajectoryPositions = [];
+                for (let i = 0; i < ObjSUMO.lon.length - 1; i += dt) {
+                    trajectoryPositions.push({
+                        longitude: ObjSUMO.lon[i],
+                        latitude: ObjSUMO.lat[i],
+                        height: dz0
+                    });
+                } // IF INDEX END
+                AddAgentMotion(startSim, stopSim, timeStepInSeconds, index + 1, trajectoryPositions, ObjSUMO.AMI, ObjSUMO.status, ObjSUMO.tda, ObjSUMO.taa, ObjSUMO.rs, ObjSUMO.rd, 0, entitiesArray, positionPropertyArray);
+            }
+        });
+    }
+
 
     AddCloud(center, startSim, stopSim);
     // =================================================================================================================================================

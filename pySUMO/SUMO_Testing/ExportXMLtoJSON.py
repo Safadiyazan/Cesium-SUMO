@@ -11,7 +11,7 @@ print(date_time)
 print('===========================')
 print('Export XML to JSON Process')
 
-NetworkName = 'SUMO_Delft'
+NetworkName = 'SUMO_NYC_South'
 
 # Load the coordinate transformation
 print('Loading Network Coordination')
@@ -42,7 +42,7 @@ for timestep in root.findall('timestep'):
                 break
             
             # Determine agent type and associated parameters
-            if agent_id.startswith('ped'):
+            if agent_id.startswith('aasdasdasdped'):
                 agent_AMI = 1
                 agent_rs = 1.5
             elif agent_id.startswith('motorcycle') or agent_id.startswith('bike'):
@@ -51,9 +51,9 @@ for timestep in root.findall('timestep'):
             elif agent_id.startswith('bus'):
                 agent_AMI = 3
                 agent_rs = 9
-            elif agent_id.startswith('pt'):
+            elif agent_id.startswith('pt') or agent_id.startswith('rail'):
                 agent_AMI = 5
-                agent_rs = 9
+                agent_rs = 30
             elif agent_id.startswith('veh'):
                 agent_AMI = 4
                 agent_rs = 3
@@ -130,15 +130,15 @@ print('===========================\nBegin Debugging\n===========================
 print(f"Parsed XML Root: {root.tag}")
 print(f"Processing up to {max_agents} agents within timesteps < 600 seconds.")
 
-# for timestep in root.findall('timestep'):
-#     time = float(timestep.get('time'))
-#     print(f"Processing Timestep: {time}")
-#     for agent in timestep.findall('person') + timestep.findall('vehicle'):
-#         agent_id = agent.get('id')
-#         print(f"  Found Agent ID: {agent_id}")
+for timestep in root.findall('timestep'):
+    time = float(timestep.get('time'))
+    print(f"Processing Timestep: {time}")
+    for agent in timestep.findall('person') + timestep.findall('vehicle'):
+        agent_id = agent.get('id')
+        print(f"  Found Agent ID: {agent_id}")
 
-#         # Additional Debug Info
-#         x, y = agent.get('x'), agent.get('y')
-#         if x and y:
-#             print(f"  Position: x={x}, y={y}")
+        # Additional Debug Info
+        x, y = agent.get('x'), agent.get('y')
+        if x and y:
+            print(f"  Position: x={x}, y={y}")
 

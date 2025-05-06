@@ -1,0 +1,302 @@
+Warning: At actuated tlLogic '103691734', linkIndex 5,6,7,8,9 has no controlling detector.
+Warning: At actuated tlLogic '103702111', linkIndex 18,19 has no controlling detector.
+Warning: At actuated tlLogic '103706471', linkIndex 2,3,4,5 has no controlling detector.
+Warning: At actuated tlLogic '103708240', linkIndex 2,3,4,5 has no controlling detector.
+Warning: At actuated tlLogic '103728604', linkIndex 0,1,2,3,12,13,14,15 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_10179006099_103862994_7572923720_7572923722_#5more', actuated phase 2 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_103665500_103665502_103686118_6899339117_#6more', actuated phase 2 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_103687402_5568167643_9045308661', actuated phase 6 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_103762515_7462368857', actuated phase 2 has no controlling detector.
+Warning: At actuated tlLogic 'cluster_103862041_440154358_7838444762', actuated phase 2 has no controlling detector.
+Warning: Program '0' at tlLogic 'joinedS_10293773980_10293773986_10293773993_10293774000_#26more' is incompatible with logic at junction 'cluster_10293773982_2022411502_2524315628_4482239795_#3more' (mutual conflict between link indices 1,9 tl indices 111,119 phase 6).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_10712627642_10712627643_cluster_10712627644_10712627645_6990761760_9353316397_#1more' is incompatible with logic at junction 'cluster_10712627644_10712627645_6990761760_9353316397_#1more' (mutual conflict between link indices 2,8 tl indices 10,16 phase 0).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_12195869800_12195880601_cluster_10931501319_3314293721_3314293722_3314293723_#5more' is incompatible with logic at junction 'cluster_10931501319_3314293721_3314293722_3314293723_#5more' (mutual conflict between link indices 4,12 tl indices 12,20 phase 0).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_12288258531_12288258533_4872777172_4872777176_#1more' is incompatible with logic at junction '4872777172' (mutual conflict between link indices 5,11 tl indices 21,27 phase 0).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_1272562861_8866504935_9121386351_cluster_11380040181_3942249541_3942249550_4878831008_#6more' is incompatible with logic at junction 'cluster_11380040181_3942249541_3942249550_4878831008_#6more' (mutual conflict between link indices 3,16 tl indices 12,25 phase 2).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_2357946612_494509169_6224335505_6224335506_#6more' is incompatible with logic at junction 'cluster_10172586221_10722387825_11709379500_2357946608_#4more' (mutual conflict between link indices 1,13 tl indices 20,32 phase 14).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_6037817063_cluster_103867498_6037816434_6037816435_6037817019_#3more_cluster_103869101_2836081201_6037817061_6037817062_#4more_cluster_103869105_6037817002_6037817004_6037817018_#7more' is incompatible with logic at junction 'cluster_103869105_6037817002_6037817004_6037817018_#7more' (mutual conflict between link indices 3,12 tl indices 47,56 phase 14).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_9039092490_9228719033_cluster_42504031_7832457098_7832457100_7832457102_#2more' is incompatible with logic at junction 'cluster_42504031_7832457098_7832457100_7832457102_#2more' (mutual conflict between link indices 4,7 tl indices 12,15 phase 0).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_9776829148_cluster_10716574916_7711046936_9220204635_9776829152_cluster_42469437_5849350240_6248573336_9246837703' is incompatible with logic at junction 'cluster_10716574916_7711046936_9220204635_9776829152' (mutual conflict between link indices 3,8 tl indices 7,12 phase 0).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_cluster_103864702_5813591351_5813591352_7319894992_cluster_12101685656_2813688364_3705061785_440243739_#4more_cluster_3991313209_3991313213_4202858842_7307384496_#2more_cluster_440243737_5496151433' is incompatible with logic at junction 'cluster_3991313209_3991313213_4202858842_7307384496_#2more' (mutual conflict between link indices 2,7 tl indices 25,30 phase 6).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_cluster_11038072107_42438531_6411125194_6411125196_#1more_cluster_436764933_5496610265_588455698_6411125199' is incompatible with logic at junction 'cluster_436764933_5496610265_588455698_6411125199' (mutual conflict between link indices 7,19 tl indices 17,29 phase 2).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Program '0' at tlLogic 'joinedS_cluster_1772136801_2034011088_246923513_4145432042_#2more_cluster_246858654_246866793_4145434712_4876394048' is incompatible with logic at junction 'cluster_246858654_246866793_4145434712_4876394048' (mutual conflict between link indices 5,18 tl indices 13,26 phase 3).
+  To avoid deadlock/collisions, either: rebuild the signal plan with a newer version of netconvert/netedit
+  or rebuild the network with option '--tls.ignore-internal-junction-jam' or include the program when building.
+Warning: Vehicle '148_ferry_SIF:0' is not allowed to stop on lane '1185795655_0'.
+Warning: Vehicle '162_ferry_SG:0' is not allowed to stop on lane '718436923_0'.
+Warning: Vehicle '162_ferry_SG:0' is not allowed to stop on lane '577830779_0'.
+Warning: Vehicle '163_ferry_ER:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '163_ferry_ER:0' is not allowed to stop on lane '1257083251_0'.
+Warning: Vehicle '163_ferry_ER:0' is not allowed to stop on lane '602277847#1_0'.
+Warning: Vehicle '200_ferry_E-PI-M:0' is not allowed to stop on lane '577830779_0'.
+Warning: Vehicle '201_ferry_HG/AH:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '201_ferry_HG/AH:0' is not allowed to stop on lane '602277848_0'.
+Warning: Vehicle '202_ferry_Belford:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '202_ferry_Belford:0' is not allowed to stop on lane '718436923_0'.
+Warning: Vehicle '202_ferry_Belford:0' is not allowed to stop on lane '577830779_0'.
+Warning: busStop '-12532206062' on lane '-1329134123_0' is too short for vehicle '215_bus_1:0'.
+Warning: busStop '6175818546' on lane '222857293#10_0' is too short for vehicle '238_bus_1:23'.
+Warning: No connection between edge '296948002#1' and edge '751442771' found.
+Warning: Vehicle '157_train_Bergen_County:0' has no valid route from edge '296948002#1' to stop edge '751442771'.
+Warning: No connection between edge '751442771' and edge '148931687#1' found.
+Warning: Vehicle '157_train_Bergen_County:0' has no valid route from edge '751442771' to stop edge '148931687#1'.
+Warning: No connection between edge '148931687#1' and edge '214500828' found.
+Warning: No route for vehicle '157_train_Bergen_County:0' found.
+Warning: No connection between edge '26827570#0' and edge '46493326' found.
+Warning: Vehicle '158_train_Morristown:0' has no valid route from edge '26827570#0' to stop edge '46493326'.
+Warning: No connection between edge '220678014' and edge '751442773' found.
+Warning: Vehicle '155_train_Main:0' has no valid route from edge '801748479' to stop edge '751442773'.
+Warning: Vehicle '155_train_Main:0' has no valid route from edge '296948002#1' to stop edge '751442771'.
+Warning: Vehicle '155_train_Main:0' has no valid route from edge '751442771' to stop edge '148931687#1'.
+Warning: Vehicle '249_bus_M50:1' has no valid route from edge '658583343#1' to stop edge '619280607#1'.
+Warning: Vehicle '248_train_North_Jersey_Coast:0' has no valid route from edge '-487692122' to stop edge '46493326'.
+Warning: Vehicle '148_ferry_SIF:0' is not allowed to depart on any lane of edge '1185795655'.
+Warning: Vehicle '162_ferry_SG:0' is not allowed to depart on any lane of edge '718436923'.
+Warning: Vehicle '163_ferry_ER:0' is not allowed to depart on any lane of edge '890490686'.
+Warning: Vehicle '200_ferry_E-PI-M:0' is not allowed to depart on any lane of edge '577830779'.
+Warning: Vehicle '201_ferry_HG/AH:0' is not allowed to depart on any lane of edge '890490686'.
+Warning: Vehicle '202_ferry_Belford:0' is not allowed to depart on any lane of edge '890490686'.
+Warning: Vehicle '256_ferry_SC-NJ:0' is not allowed to stop on lane '1187385595#1_0'.
+Warning: Vehicle '256_ferry_SC-NJ:0' is not allowed to stop on lane '222144754_0'.
+Warning: Vehicle '256_ferry_SC-NJ:0' is not allowed to stop on lane '222144753_0'.
+Warning: Vehicle '256_ferry_SC-NJ:0' is not allowed to stop on lane '1187385595#1_0'.
+Warning: Vehicle '257_ferry_SC-NY:0' is not allowed to stop on lane '1186074407_0'.
+Warning: Vehicle '257_ferry_SC-NY:0' is not allowed to stop on lane '222144754_0'.
+Warning: Vehicle '257_ferry_SC-NY:0' is not allowed to stop on lane '222144753_0'.
+Warning: Vehicle '257_ferry_SC-NY:0' is not allowed to stop on lane '1186074407_0'.
+Warning: busStop '2731319075' on lane '800487231#1_0' is too short for vehicle '262_light_rail_HBLR:4'.
+Warning: Vehicle '269_ferry_LH-H14-M:0' is not allowed to stop on lane '577846117_0'.
+Warning: Vehicle '269_ferry_LH-H14-M:0' is not allowed to stop on lane '207411150#0_0'.
+Warning: Vehicle '269_ferry_LH-H14-M:0' is not allowed to stop on lane '577830779_0'.
+Warning: Vehicle '270_ferry_HT-11:0' is not allowed to stop on lane '577842557#1_0'.
+Warning: Vehicle '270_ferry_HT-11:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '271_ferry_HT-BPC:0' is not allowed to stop on lane '577842557#1_0'.
+Warning: Vehicle '271_ferry_HT-BPC:0' is not allowed to stop on lane '718436923_0'.
+Warning: Vehicle '272_ferry_MB-PH-11:0' is not allowed to stop on lane '907785443_0'.
+Warning: Vehicle '272_ferry_MB-PH-11:0' is not allowed to stop on lane '285578516_0'.
+Warning: Vehicle '272_ferry_MB-PH-11:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '273_ferry_PH-HT-M:0' is not allowed to stop on lane '285578516_0'.
+Warning: Vehicle '273_ferry_PH-HT-M:0' is not allowed to stop on lane '577842557#1_0'.
+Warning: Vehicle '273_ferry_PH-HT-M:0' is not allowed to stop on lane '577830779_0'.
+Warning: Vehicle '274_ferry_PH-BPC:0' is not allowed to stop on lane '285578516_0'.
+Warning: Vehicle '274_ferry_PH-BPC:0' is not allowed to stop on lane '718436923_0'.
+Warning: Vehicle '275_ferry_PI-M:0' is not allowed to stop on lane '577830779_0'.
+Warning: Vehicle '276_ferry_PI-H14-BPC-11:0' is not allowed to stop on lane '207411150#0_0'.
+Warning: Vehicle '276_ferry_PI-H14-BPC-11:0' is not allowed to stop on lane '718436923_0'.
+Warning: Vehicle '276_ferry_PI-H14-BPC-11:0' is not allowed to stop on lane '890490686_0'.
+Warning: Vehicle '303_ferry_SIF:1' is not allowed to stop on lane '1185795655_0'.
+Warning: busStop '5157164360' on lane '1123956071_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5157164366' on lane '1123956046#1_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5037014735' on lane '1123956046#1_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5037014736' on lane '1123956021#1_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5157165045' on lane '1123956021#1_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5157164391' on lane '1123956021#1_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5157165028' on lane '1123956059_0' is too short for vehicle '306_monorail_AirTrain:0'.
+Warning: busStop '5157165027' on lane '1123956058_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '5157164390' on lane '1123956017#2_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '5157165046' on lane '1123956017#2_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '5157164389' on lane '1123956045#1_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '5157164367' on lane '1123956045#1_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '5157164361' on lane '1123956070_0' is too short for vehicle '307_monorail_AirTrain:1'.
+Warning: busStop '7637061487' on lane '821683795#3_0' is too short for vehicle '339_subway_W:0'.
+Warning: busStop '-7637061487' on lane '-817752592_0' is too short for vehicle '342_subway_W:1'.
+Warning: Vehicle '265_train_Meadowlands:0' has no valid route from edge '296948002#1' to stop edge '751442771'.
+Warning: Vehicle '265_train_Meadowlands:0' has no valid route from edge '751442771' to stop edge '148931687#1'.
+Warning: No route for vehicle '265_train_Meadowlands:0' found.
+Warning: Vehicle '379_subway_R:3' has no valid route from edge '813712310' to stop edge '821683795#3'.
+Warning: No route for vehicle '379_subway_R:3' found.
+Warning: Vehicle '266_train_Pascack_Valley:0' has no valid route from edge '220548478' to stop edge '751442771'.
+Warning: Vehicle '307_monorail_AirTrain:1' has no valid route from edge '1123956017#2' to stop edge '1123956021#1'.
+Warning: Vehicle '307_monorail_AirTrain:1' has no valid route from edge '1123956021#1' to stop edge '1123956045#1'.
+Warning: No route for vehicle '307_monorail_AirTrain:1' found.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956071' to stop edge '1123956046#1'.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956046#1' to stop edge '1123956046#1'.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956046#1' to stop edge '1123956021#1'.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956021#1' to stop edge '1123956021#1'.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956021#1' to stop edge '1123956021#1'.
+Warning: Vehicle '306_monorail_AirTrain:0' has no valid route from edge '1123956021#1' to stop edge '1123956059'.
+Warning: Vehicle '256_ferry_SC-NJ:0' is not allowed to depart on any lane of edge '1187385595#1'.
+Warning: Vehicle '257_ferry_SC-NY:0' is not allowed to depart on any lane of edge '1186074407'.
+Warning: Vehicle '269_ferry_LH-H14-M:0' is not allowed to depart on any lane of edge '577846117'.
+Warning: Vehicle '270_ferry_HT-11:0' is not allowed to depart on any lane of edge '577842557#1'.
+Warning: Vehicle '271_ferry_HT-BPC:0' is not allowed to depart on any lane of edge '577842557#1'.
+Warning: Vehicle '272_ferry_MB-PH-11:0' is not allowed to depart on any lane of edge '907785443'.
+Warning: Vehicle '273_ferry_PH-HT-M:0' is not allowed to depart on any lane of edge '285578516'.
+Warning: Vehicle '274_ferry_PH-BPC:0' is not allowed to depart on any lane of edge '285578516'.
+Warning: Vehicle '275_ferry_PI-M:0' is not allowed to depart on any lane of edge '577830779'.
+Warning: Vehicle '276_ferry_PI-H14-BPC-11:0' is not allowed to depart on any lane of edge '207411150#0'.
+Warning: Vehicle '57_train_Keystone_Service:6' performs emergency braking on lane '487768013_0' with decel=5.00, wished=1.30, severity=1.00, time=488.00.
+Warning: Vehicle '303_ferry_SIF:1' is not allowed to depart on any lane of edge '1185795655'.
+Warning: Teleporting vehicle '155_train_Main:0'; waited too long (wrong lane), lane='801748479_0', time=538.00.
+Warning: Vehicle '155_train_Main:0' ends teleporting on edge '751442773', time=538.00.
+Warning: Teleporting vehicle '158_train_Morristown:0'; waited too long (wrong lane), lane='26827570#0_0', time=541.00.
+Warning: Vehicle '158_train_Morristown:0' ends teleporting on edge '46493326', time=560.00.
+Warning: Vehicle '310_subway_HOB–WTC:1' performs emergency braking on lane ':5207212340_0_0' with decel=9.00, wished=4.50, severity=1.00, time=561.00.
+Warning: Teleporting vehicle '53_train_Keystone_Service:2'; frontal collision with vehicle '51_train_Keystone_Service:0', lane='-487701500_0', gap=-1.00, time=607.00, stage=move.
+Warning: Teleporting vehicle '51_train_Keystone_Service:0'; frontal collision with vehicle '54_train_Keystone_Service:3', lane='-193427376_0', gap=-1.00, time=640.00, stage=move.
+Warning: Vehicle '53_train_Keystone_Service:2' ends teleporting on edge '487692128', time=641.00.
+Warning: Teleporting vehicle '52_train_Keystone_Service:1'; frontal collision with vehicle '54_train_Keystone_Service:3', lane='1052829447_0', gap=-1.00, time=664.00, stage=move.
+Warning: Teleporting vehicle '59_train_Keystone_Service:8'; frontal collision with vehicle '54_train_Keystone_Service:3', lane='1052829447_0', gap=-1.00, time=674.00, stage=move.
+Warning: Teleporting vehicle '54_train_Keystone_Service:3'; frontal collision with vehicle '60_train_Keystone_Service:9', lane='1025216601_0', gap=-1.00, time=697.00, stage=move.
+Warning: Vehicle '54_train_Keystone_Service:3' ends teleporting on edge '487692128', time=708.00.
+Warning: Teleporting vehicle '249_bus_M50:1'; waited too long (wrong lane), lane='658583343#1_0', time=718.00.
+Warning: Vehicle '249_bus_M50:1' ends teleporting on edge '619280607#1', time=718.00.
+Warning: Teleporting vehicle '60_train_Keystone_Service:9'; frontal collision with vehicle '55_train_Keystone_Service:4', lane='-193427376_0', gap=-1.00, time=752.00, stage=move.
+Warning: Teleporting vehicle '53_train_Keystone_Service:2'; frontal collision with vehicle '70_train_Acela:4', lane='-193816225_0', gap=-1.00, time=755.00, stage=move.
+Warning: Vehicle '52_train_Keystone_Service:1' skips stop on lane '459674123_0' time=758.00.
+Warning: Teleporting vehicle '62_train_Keystone_Service:10'; frontal collision with vehicle '55_train_Keystone_Service:4', lane='1052829447_0', gap=-1.00, time=764.00, stage=move.
+Warning: Vehicle '59_train_Keystone_Service:8' skips stop on lane '459674123_0' time=768.00.
+Warning: Teleporting vehicle '157_train_Bergen_County:0'; waited too long (wrong lane), lane='751442773_0', time=772.00.
+Warning: Teleporting vehicle '266_train_Pascack_Valley:0'; waited too long (wrong lane), lane='220548478_0', time=773.00.
+Warning: Teleporting vehicle '52_train_Keystone_Service:1'; collision with vehicle '74_train_Acela:8', lane='792757454_0', gap=-1.00, time=801.00, stage=move.
+Warning: Teleporting vehicle '61_train_Vermonter:0'; collision with vehicle '55_train_Keystone_Service:4', lane='-1025216601_0', gap=-1.00, time=801.00, stage=move.
+Warning: Teleporting vehicle '59_train_Keystone_Service:8'; collision with vehicle '74_train_Acela:8', lane='792757454_0', gap=-1.00, time=811.00, stage=move.
+Warning: Teleporting vehicle '54_train_Keystone_Service:3'; frontal collision with vehicle '71_train_Acela:5', lane='-193816225_0', gap=-1.00, time=822.00, stage=move.
+Warning: Vehicle '60_train_Keystone_Service:9' skips stop on lane '459674123_0' time=841.00.
+Warning: Vehicle '62_train_Keystone_Service:10' skips stop on lane '459674123_0' time=858.00.
+Warning: Teleporting vehicle '65_train_Vermonter:2'; frontal collision with vehicle '56_train_Keystone_Service:5', lane='1025216601_0', gap=-1.00, time=862.00, stage=move.
+Warning: Teleporting vehicle '60_train_Keystone_Service:9'; collision with vehicle '76_train_Northeast_Regional:1', lane='792757454_0', gap=-1.00, time=884.00, stage=move.
+Warning: Vehicle '61_train_Vermonter:0' skips stop on lane '459674123_0' time=895.00.
+Warning: Teleporting vehicle '70_train_Acela:4'; frontal collision with vehicle '58_train_Keystone_Service:7', lane='-792757502_0', gap=-1.00, time=918.00, stage=move.
+Warning: Teleporting vehicle '61_train_Vermonter:0'; collision with vehicle '75_train_Northeast_Regional:0', lane='792757454_0', gap=-1.00, time=938.00, stage=move.
+Warning: Teleporting vehicle '55_train_Keystone_Service:4'; collision with vehicle '79_train_Northeast_Regional:4', lane='-193816237_0', gap=-1.00, time=982.00, stage=move.
+Warning: Teleporting vehicle '71_train_Acela:5'; frontal collision with vehicle '64_train_Vermonter:1', lane='-792757501_0', gap=-1.00, time=982.00, stage=move.
+Warning: Vehicle '53_train_Keystone_Service:2' teleports beyond arrival edge '-879081748#0', time=1002.00.
+Warning: Teleporting vehicle '56_train_Keystone_Service:5'; frontal collision with vehicle '89_train_Northeast_Regional:14', lane='-193816225_0', gap=-1.00, time=1043.00, stage=move.
+Warning: Vehicle '54_train_Keystone_Service:3' teleports beyond arrival edge '-879081748#0', time=1069.00.
+Warning: Teleporting vehicle '57_train_Keystone_Service:6'; frontal collision with vehicle '78_train_Northeast_Regional:3', lane='-487701500_0', gap=-1.00, time=1090.00, stage=move.
+Warning: Teleporting vehicle '58_train_Keystone_Service:7'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='487584428_0', gap=-1.00, time=1104.00, stage=move.
+Warning: Teleporting vehicle '78_train_Northeast_Regional:3'; frontal collision with vehicle '67_train_Acela:1', lane='1052829447_0', gap=-1.00, time=1124.00, stage=move.
+Warning: Teleporting vehicle '64_train_Vermonter:1'; collision with vehicle '91_train_Northeast_Regional:16', lane='487584428_0', gap=-1.00, time=1147.00, stage=move.
+Warning: Teleporting vehicle '158_train_Morristown:0'; frontal collision with vehicle '67_train_Acela:1', lane='-1025216601_0', gap=-1.00, time=1174.00, stage=move.
+Warning: Teleporting vehicle '64_train_Vermonter:1'; frontal collision with vehicle '103_train_Northeast_Regional:28', lane='750256036#1_0', gap=-1.00, time=1178.00, stage=move.
+Warning: Teleporting vehicle '79_train_Northeast_Regional:4'; frontal collision with vehicle '67_train_Acela:1', lane=':2035757979_3_0', gap=-1.00, time=1178.00, stage=move.
+Warning: Teleporting vehicle '103_train_Northeast_Regional:28'; collision with vehicle '64_train_Vermonter:1', lane='-1024622378_0', gap=-1.00, time=1188.00, stage=move.
+Warning: Teleporting vehicle '66_train_Acela:0'; collision with vehicle '92_train_Northeast_Regional:17', lane='487584428_0', gap=-1.00, time=1214.00, stage=move.
+Warning: Teleporting vehicle '72_train_Acela:6'; frontal collision with vehicle '89_train_Northeast_Regional:14', lane='-487701500_0', gap=-1.00, time=1224.00, stage=move.
+Warning: Teleporting vehicle '66_train_Acela:0'; frontal collision with vehicle '104_train_Northeast_Regional:29', lane='750256036#1_0', gap=-1.00, time=1245.00, stage=move.
+Warning: Vehicle '55_train_Keystone_Service:4' teleports beyond arrival edge '-879081748#0', time=1246.00.
+Warning: Teleporting vehicle '104_train_Northeast_Regional:29'; collision with vehicle '66_train_Acela:0', lane='-1024622378_0', gap=-1.00, time=1255.00, stage=move.
+Warning: Teleporting vehicle '89_train_Northeast_Regional:14'; frontal collision with vehicle '73_train_Acela:7', lane='1052829447_0', gap=-1.00, time=1258.00, stage=move.
+Warning: Teleporting vehicle '78_train_Northeast_Regional:3'; collision with vehicle '85_train_Northeast_Regional:10', lane='792757454_0', gap=-1.00, time=1261.00, stage=move.
+Warning: Teleporting vehicle '57_train_Keystone_Service:6'; frontal collision with vehicle '93_train_Northeast_Regional:18', lane='-487584428_0', gap=-1.00, time=1277.00, stage=move.
+Warning: Vehicle '56_train_Keystone_Service:5' teleports beyond arrival edge '-879081748#0', time=1290.00.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; frontal collision with vehicle '73_train_Acela:7', lane='-1025216601_0', gap=-1.00, time=1301.00, stage=move.
+Warning: Teleporting vehicle '91_train_Northeast_Regional:16'; collision with vehicle '73_train_Acela:7', lane='-792757502_0', gap=-1.00, time=1314.00, stage=move.
+Warning: Vehicle '58_train_Keystone_Service:7' teleports beyond arrival edge '-879081748#0', time=1316.00.
+Warning: Teleporting vehicle '67_train_Acela:1'; collision with vehicle '94_train_Northeast_Regional:19', lane='487584428_0', gap=-1.00, time=1348.00, stage=move.
+Warning: Teleporting vehicle '67_train_Acela:1'; frontal collision with vehicle '106_train_Northeast_Regional:31', lane='750256036#1_0', gap=-1.00, time=1379.00, stage=move.
+Warning: Teleporting vehicle '92_train_Northeast_Regional:17'; frontal collision with vehicle '74_train_Acela:8', lane=':2035757979_3_0', gap=-1.00, time=1382.00, stage=move.
+Warning: Teleporting vehicle '106_train_Northeast_Regional:31'; collision with vehicle '67_train_Acela:1', lane='-1024622378_0', gap=-1.00, time=1389.00, stage=move.
+Warning: Teleporting vehicle '89_train_Northeast_Regional:14'; collision with vehicle '84_train_Northeast_Regional:9', lane='792757454_0', gap=-1.00, time=1395.00, stage=move.
+Warning: Teleporting vehicle '72_train_Acela:6'; collision with vehicle '103_train_Northeast_Regional:28', lane='-193816237_0', gap=-1.00, time=1398.00, stage=move.
+Warning: Teleporting vehicle '107_train_Northeast_Regional:32'; frontal collision with vehicle '72_train_Acela:6', lane='-750256036#1_0', gap=-1.00, time=1448.00, stage=move.
+Warning: Teleporting vehicle '93_train_Northeast_Regional:18'; frontal collision with vehicle '76_train_Northeast_Regional:1', lane='-1025216601_0', gap=-1.00, time=1455.00, stage=move.
+Warning: Teleporting vehicle '105_train_Northeast_Regional:30'; frontal collision with vehicle '73_train_Acela:7', lane='-316621098_0', gap=-1.00, time=1514.00, stage=move.
+Warning: Teleporting vehicle '94_train_Northeast_Regional:19'; frontal collision with vehicle '75_train_Northeast_Regional:0', lane='792757502_0', gap=-1.00, time=1514.00, stage=move.
+Warning: Teleporting vehicle '106_train_Northeast_Regional:31'; frontal collision with vehicle '73_train_Acela:7', lane='-316621098_0', gap=-1.00, time=1535.00, stage=move.
+Warning: Teleporting vehicle '74_train_Acela:8'; frontal collision with vehicle '105_train_Northeast_Regional:30', lane='-193816237_0', gap=-1.00, time=1546.00, stage=move.
+Warning: Teleporting vehicle '107_train_Northeast_Regional:32'; frontal collision with vehicle '73_train_Acela:7', lane='-316621098_0', gap=-1.00, time=1566.00, stage=move.
+Warning: Teleporting vehicle '103_train_Northeast_Regional:28'; frontal collision with vehicle '81_train_Northeast_Regional:6', lane='1025216601_0', gap=-1.00, time=1568.00, stage=move.
+Warning: Teleporting vehicle '73_train_Acela:7'; frontal collision with vehicle '108_train_Northeast_Regional:33', lane='-316621098_0', gap=-1.00, time=1614.00, stage=move.
+Warning: Teleporting vehicle '104_train_Northeast_Regional:29'; frontal collision with vehicle '82_train_Northeast_Regional:7', lane='1025216601_0', gap=-1.00, time=1635.00, stage=move.
+Warning: Teleporting vehicle '110_train_Northeast_Regional:35'; collision with vehicle '73_train_Acela:7', lane='-750256036#3_0', gap=-1.00, time=1647.00, stage=move.
+Warning: Teleporting vehicle '105_train_Northeast_Regional:30'; frontal collision with vehicle '77_train_Northeast_Regional:2', lane='-1025216601_0', gap=-1.00, time=1714.00, stage=move.
+Warning: Teleporting vehicle '108_train_Northeast_Regional:33'; frontal collision with vehicle '367_train_NEC:1', lane='-316621098_0', gap=-1.00, time=1716.00, stage=move.
+Warning: Teleporting vehicle '106_train_Northeast_Regional:31'; frontal collision with vehicle '77_train_Northeast_Regional:2', lane='-792757502_0', gap=-1.00, time=1725.00, stage=move.
+Warning: Teleporting vehicle '109_train_Northeast_Regional:34'; frontal collision with vehicle '367_train_NEC:1', lane='-316621098_0', gap=-1.00, time=1750.00, stage=move.
+Warning: Teleporting vehicle '108_train_Northeast_Regional:33'; frontal collision with vehicle '81_train_Northeast_Regional:6', lane='-487584428_0', gap=-1.00, time=1754.00, stage=move.
+Warning: Teleporting vehicle '107_train_Northeast_Regional:32'; frontal collision with vehicle '80_train_Northeast_Regional:5', lane='-487701500_0', gap=-1.00, time=1774.00, stage=move.
+Warning: Teleporting vehicle '110_train_Northeast_Regional:35'; frontal collision with vehicle '367_train_NEC:1', lane='-316621098_0', gap=-1.00, time=1785.00, stage=move.
+Warning: Teleporting vehicle '82_train_Northeast_Regional:7'; collision with vehicle '110_train_Northeast_Regional:35', lane='193816225_0', gap=-1.00, time=1814.00, stage=move.
+Warning: Teleporting vehicle '367_train_NEC:1'; frontal collision with vehicle '111_train_Northeast_Regional:36', lane='-316621098_0', gap=-1.00, time=1817.00, stage=move.
+Warning: Teleporting vehicle '111_train_Northeast_Regional:36'; frontal collision with vehicle '76_train_Northeast_Regional:1', lane='-316621098_0', gap=-1.00, time=1820.00, stage=move.
+Warning: Teleporting vehicle '76_train_Northeast_Regional:1'; frontal collision with vehicle '180_train_Acela:9', lane='-316621098_0', gap=-1.00, time=1851.00, stage=move.
+Warning: Teleporting vehicle '75_train_Northeast_Regional:0'; frontal collision with vehicle '180_train_Acela:9', lane='-316621098_0', gap=-1.00, time=1855.00, stage=move.
+Warning: Teleporting vehicle '81_train_Northeast_Regional:6'; frontal collision with vehicle '180_train_Acela:9', lane='-316621098_0', gap=-1.00, time=1883.00, stage=move.
+Warning: Teleporting vehicle '108_train_Northeast_Regional:33'; junction collision with vehicle '83_train_Northeast_Regional:8', lane=':2035757979_0_0', gap=-1.00, time=1916.00, stage=move.
+Warning: Teleporting vehicle '187_train_Northeast_Regional:50'; collision with vehicle '81_train_Northeast_Regional:6', lane='-750256036#3_0', gap=-1.00, time=1921.00, stage=move.
+Warning: Teleporting vehicle '109_train_Northeast_Regional:34'; collision with vehicle '83_train_Northeast_Regional:8', lane='792757502_0', gap=-1.00, time=1923.00, stage=move.
+Warning: Teleporting vehicle '180_train_Acela:9'; frontal collision with vehicle '77_train_Northeast_Regional:2', lane='-316621098_0', gap=-1.00, time=1953.00, stage=move.
+Warning: Teleporting vehicle '187_train_Northeast_Regional:50'; frontal collision with vehicle '80_train_Northeast_Regional:5', lane='-487584428_0', gap=-1.00, time=1968.00, stage=move.
+Warning: Teleporting vehicle '180_train_Acela:9'; frontal collision with vehicle '80_train_Northeast_Regional:5', lane='-487584428_0', gap=-1.00, time=1971.00, stage=move.
+Warning: Teleporting vehicle '110_train_Northeast_Regional:35'; frontal collision with vehicle '84_train_Northeast_Regional:9', lane='-1025216601_0', gap=-1.00, time=1979.00, stage=move.
+Warning: Teleporting vehicle '111_train_Northeast_Regional:36'; frontal collision with vehicle '97_train_Northeast_Regional:22', lane='-487701500_0', gap=-1.00, time=2028.00, stage=move.
+Warning: Teleporting vehicle '77_train_Northeast_Regional:2'; frontal collision with vehicle '188_train_Northeast_Regional:51', lane='316621098_0', gap=-1.00, time=2040.00, stage=move.
+Warning: Teleporting vehicle '302_train_Northeast_Regional:59'; collision with vehicle '77_train_Northeast_Regional:2', lane='-750256036#3_0', gap=-1.00, time=2077.00, stage=move.
+Warning: Teleporting vehicle '80_train_Northeast_Regional:5'; frontal collision with vehicle '188_train_Northeast_Regional:51', lane='316621098_0', gap=-1.00, time=2078.00, stage=move.
+Warning: Teleporting vehicle '92_train_Northeast_Regional:17'; collision with vehicle '119_train_Northeast_Regional:44', lane='792757454_0', gap=-1.00, time=2078.00, stage=move.
+Warning: Teleporting vehicle '85_train_Northeast_Regional:10'; frontal collision with vehicle '188_train_Northeast_Regional:51', lane='316621098_0', gap=-1.00, time=2104.00, stage=move.
+Warning: Teleporting vehicle '188_train_Northeast_Regional:51'; frontal collision with vehicle '83_train_Northeast_Regional:8', lane='-316621098_0', gap=-1.00, time=2138.00, stage=move.
+Warning: Teleporting vehicle '369_train_Acela:14'; collision with vehicle '85_train_Northeast_Regional:10', lane='-750256036#3_0', gap=-1.00, time=2144.00, stage=move.
+Warning: Teleporting vehicle '84_train_Northeast_Regional:9'; collision with vehicle '302_train_Northeast_Regional:59', lane='193816225_0', gap=-1.00, time=2148.00, stage=move.
+Warning: Teleporting vehicle '70_train_Acela:4'; collision with vehicle '98_train_Northeast_Regional:23', lane='792757454_0', gap=-1.00, time=2154.00, stage=move.
+Warning: Teleporting vehicle '87_train_Northeast_Regional:12'; frontal collision with vehicle '187_train_Northeast_Regional:50', lane='-487701500_0', gap=-1.00, time=2155.00, stage=move.
+Warning: Teleporting vehicle '111_train_Northeast_Regional:36'; collision with vehicle '98_train_Northeast_Regional:23', lane='792757454_0', gap=-1.00, time=2165.00, stage=move.
+Warning: Teleporting vehicle '301_train_Northeast_Regional:58'; frontal collision with vehicle '83_train_Northeast_Regional:8', lane='-316621098_0', gap=-1.00, time=2169.00, stage=move.
+Warning: Teleporting vehicle '95_train_Northeast_Regional:20'; frontal collision with vehicle '187_train_Northeast_Regional:50', lane=':4801212703_3_0', gap=-1.00, time=2188.00, stage=move.
+Warning: Teleporting vehicle '71_train_Acela:5'; collision with vehicle '99_train_Northeast_Regional:24', lane='792757454_0', gap=-1.00, time=2211.00, stage=move.
+Warning: Teleporting vehicle '301_train_Northeast_Regional:58'; frontal collision with vehicle '97_train_Northeast_Regional:22', lane='-487584428_0', gap=-1.00, time=2222.00, stage=move.
+Warning: Teleporting vehicle '97_train_Northeast_Regional:22'; frontal collision with vehicle '369_train_Acela:14', lane='-487584428_0', gap=-1.00, time=2224.00, stage=move.
+Warning: Teleporting vehicle '187_train_Northeast_Regional:50'; frontal collision with vehicle '101_train_Northeast_Regional:26', lane='792757478#1_0', gap=-1.00, time=2225.00, stage=move.
+Warning: Teleporting vehicle '180_train_Acela:9'; frontal collision with vehicle '101_train_Northeast_Regional:26', lane='792757478#1_0', gap=-1.00, time=2229.00, stage=move.
+Warning: Teleporting vehicle '302_train_Northeast_Regional:59'; frontal collision with vehicle '101_train_Northeast_Regional:26', lane='-1025216601_0', gap=-1.00, time=2317.00, stage=move.
+Warning: Teleporting vehicle '188_train_Northeast_Regional:51'; frontal collision with vehicle '101_train_Northeast_Regional:26', lane='-792757502_0', gap=-1.00, time=2329.00, stage=move.
+Warning: Teleporting vehicle '187_train_Northeast_Regional:50'; collision with vehicle '176_train_Keystone_Service:12', lane='792757454_0', gap=-1.00, time=2334.00, stage=move.
+Warning: Teleporting vehicle '180_train_Acela:9'; collision with vehicle '176_train_Keystone_Service:12', lane='792757454_0', gap=-1.00, time=2338.00, stage=move.
+Warning: Teleporting vehicle '102_train_Northeast_Regional:27'; frontal collision with vehicle '301_train_Northeast_Regional:58', lane='-487701500_0', gap=-1.00, time=2403.00, stage=move.
+Warning: Teleporting vehicle '79_train_Northeast_Regional:4'; collision with vehicle '100_train_Northeast_Regional:25', lane='792757454_0', gap=-1.00, time=2414.00, stage=move.
+Warning: Teleporting vehicle '117_train_Northeast_Regional:42'; frontal collision with vehicle '301_train_Northeast_Regional:58', lane='-487701500_0', gap=-1.00, time=2416.00, stage=move.
+Warning: Teleporting vehicle '158_train_Morristown:0'; collision with vehicle '100_train_Northeast_Regional:25', lane='792757454_0', gap=-1.00, time=2425.00, stage=move.
+Warning: Teleporting vehicle '301_train_Northeast_Regional:58'; frontal collision with vehicle '96_train_Northeast_Regional:21', lane='-193427376_0', gap=-1.00, time=2449.00, stage=move.
+Warning: Teleporting vehicle '96_train_Northeast_Regional:21'; frontal collision with vehicle '369_train_Acela:14', lane=':4801212703_3_0', gap=-1.00, time=2456.00, stage=move.
+Warning: Teleporting vehicle '369_train_Acela:14'; frontal collision with vehicle '118_train_Northeast_Regional:43', lane='792757478#1_0', gap=-1.00, time=2494.00, stage=move.
+Warning: Teleporting vehicle '188_train_Northeast_Regional:51'; collision with vehicle '182_train_Acela:11', lane='792757454_0', gap=-1.00, time=2532.00, stage=move.
+Warning: Teleporting vehicle '302_train_Northeast_Regional:59'; collision with vehicle '182_train_Acela:11', lane='792757454_0', gap=-1.00, time=2535.00, stage=move.
+Warning: Teleporting vehicle '369_train_Acela:14'; collision with vehicle '120_train_Northeast_Regional:45', lane='792757454_0', gap=-1.00, time=2603.00, stage=move.
+Warning: Vehicle '188_train_Northeast_Regional:51' performs emergency braking on lane '1123956076_0' with decel=5.00, wished=1.30, severity=1.00, time=2662.00.
+Warning: Teleporting vehicle '91_train_Northeast_Regional:16'; collision with vehicle '158_train_Morristown:0', lane='792757454_0', gap=-1.00, time=3373.00, stage=move.
+Warning: Teleporting vehicle '103_train_Northeast_Regional:28'; frontal collision with vehicle '186_train_Northeast_Regional:49', lane=':2139727035_2_0', gap=-1.00, time=3570.00, stage=move.
+Warning: Teleporting vehicle '104_train_Northeast_Regional:29'; frontal collision with vehicle '191_train_Northeast_Regional:54', lane=':2139727035_2_0', gap=-1.00, time=3637.00, stage=move.
+Warning: Teleporting vehicle '105_train_Northeast_Regional:30'; collision with vehicle '192_train_Northeast_Regional:55', lane='-813664369_0', gap=-1.00, time=3723.00, stage=move.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; collision with vehicle '104_train_Northeast_Regional:29', lane='792757454_0', gap=-1.00, time=3804.00, stage=move.
+Warning: Teleporting vehicle '63_train_Keystone_Service:11'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='-316621098_0', gap=-1.00, time=4515.00, stage=move.
+Warning: Teleporting vehicle '68_train_Acela:2'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='-316621098_0', gap=-1.00, time=4532.00, stage=move.
+Warning: Teleporting vehicle '69_train_Acela:3'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='-316621098_0', gap=-1.00, time=4549.00, stage=move.
+Warning: Teleporting vehicle '88_train_Northeast_Regional:13'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='-316621098_0', gap=-1.00, time=4566.00, stage=move.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; frontal collision with vehicle '90_train_Northeast_Regional:15', lane='-316621098_0', gap=-1.00, time=4583.00, stage=move.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; collision with vehicle '156_train_Gladstone:0', lane='150089428_0', gap=-274.75, time=5890.00, stage=move.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; frontal collision with vehicle '193_train_Northeast_Regional:56', lane='-333415937_0', gap=-1.00, time=6033.00, stage=move.
+Warning: Teleporting vehicle '156_train_Gladstone:0'; frontal collision with vehicle '203_train_Silver_Meteor:0', lane=':7412962897_1_0', gap=-1.00, time=6143.00, stage=move.
+Warning: Teleporting vehicle '156_train_Gladstone:0'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='1024622378_0', gap=-1.00, time=7056.00, stage=move.
+Warning: Teleporting vehicle '248_train_North_Jersey_Coast:0'; collision with vehicle '156_train_Gladstone:0', lane='-1024622378_0', gap=-1.00, time=7066.00, stage=move.
+Warning: Teleporting vehicle '156_train_Gladstone:0'; frontal collision with vehicle '248_train_North_Jersey_Coast:0', lane='316621098_0', gap=-1.00, time=9199.00, stage=move.
+Warning: 27 total messages of type: At actuated tlLogic '%', actuated phase % has no controlling detector.
+Warning: 174 total messages of type: At actuated tlLogic '%', linkIndex % has no controlling detector.
+Warning: 24 total messages of type: No connection between edge '%' and edge '%' found.
+Warning: 38 total messages of type: Teleporting vehicle '%'; waited too long (wrong lane), lane='%', time=%.
+Warning: 154 total messages of type: Vehicle '%' ends teleporting on edge '%', time=%.
+Warning: 20 total messages of type: Vehicle '%' skips stop on lane '%' time=%.
+Warning: 6 total messages of type: Vehicle '%' teleports beyond arrival edge '%', time=%.
