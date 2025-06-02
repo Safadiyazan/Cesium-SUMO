@@ -1,8 +1,7 @@
 node_modules/
 dist/
-Outputs/
-public/LAATSimData
-public/NewSettings.json
+MIS/
+*.json
 *.XML
 *.osm
 *.pbf

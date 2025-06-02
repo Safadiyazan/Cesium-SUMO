@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
 import * as Cesium from "cesium";
 import { Model, IonResource, ClockStep, CloudCollection, PolylineDashMaterialProperty, ClockRange, HeadingPitchRoll, Quaternion, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
-import ViewerToolBar from './components/ViewerToolBar';
-import NetworkSetup from './components/NetworkSetup.js';
 import './css/main.css'; // Ensure this import is here
 
 // =================================================================================================================================================
@@ -717,27 +714,27 @@ export async function LoadSimulation(viewer, data, dataSUMO1, dataSUMO2, dataSUM
         // Add Aircraft Model
         async function loadModel(positionProperty, entitiesArray, positionPropertyArray, AMI) {
 
-            var AircraftURL = "/YS_VTOL.glb";
+            var AircraftURL = "/glbs/YS_VTOL.glb";
             var AircraftURLScale = 2;
             switch (AMI) {
                 case 1:
-                    AircraftURL = "/YS_VTOL_Medical.glb";
+                    AircraftURL = "/glbs/YS_VTOL_Medical.glb";
                     AircraftURLScale = 2;
                     break;
                 case 2:
-                    AircraftURL = "/YS_Drone_MedicalCargo.glb";
+                    AircraftURL = "/glbs/YS_Drone_MedicalCargo.glb";
                     AircraftURLScale = 1;
                     break;
                 case 3:
-                    AircraftURL = "/YS_VTOL.glb";
+                    AircraftURL = "/glbs/YS_VTOL.glb";
                     AircraftURLScale = 2;
                     break;
                 case 4:
-                    AircraftURL = "/YS_Drone_Pack.glb";
+                    AircraftURL = "/glbs/YS_Drone_Pack.glb";
                     AircraftURLScale = 1;
                     break;
                 default:
-                    AircraftURL = "/YS_VTOL.glb";
+                    AircraftURL = "/glbs/YS_VTOL.glb";
                     AircraftURLScale = 2;
 
             }
@@ -1772,23 +1769,23 @@ export async function LoadSimulation(viewer, data, dataSUMO1, dataSUMO2, dataSUM
             let AgentURL, AgentURLScale;
             switch (AMI) {
                 case 1:
-                    AgentURL = "/YS_Human.glb";
+                    AgentURL = "/glbs/YS_Human.glb";
                     AgentURLScale = 1;
                     break;
                 case 2:
-                    AgentURL = "/YS_Motor.glb";
+                    AgentURL = "/glbs/YS_Motor.glb";
                     AgentURLScale = 1;
                     break;
                 case 3:
-                    AgentURL = "/YS_Bus.glb";
+                    AgentURL = "/glbs/YS_Bus.glb";
                     AgentURLScale = 0.5;
                     break;
                 case 5:
-                    AgentURL = "/YS_Train.glb";
+                    AgentURL = "/glbs/YS_Train.glb";
                     AgentURLScale = 0.5;
                     break;
                 default:
-                    AgentURL = "/YS_NewCar.glb";
+                    AgentURL = "/glbs/YS_NewCar.glb";
                     AgentURLScale = 0.25;
             }
 

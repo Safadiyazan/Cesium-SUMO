@@ -8,7 +8,7 @@
     "start": "npm-run-all --parallel start-frontend start-backend start-LAATSim",
     "start-frontend": "webpack serve --config webpack.config.js --open",
     "start-backend": "node server.js",
-    "start-LAATSim": "python LAATSimMATLAB.py"
+    "start-LAATSim": "python ./src/pyScript.py"
   },
   "proxy": "http://localhost:1111",
   "author": "",
