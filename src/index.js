@@ -8,7 +8,7 @@ import { createRoot } from 'react-dom/client';
 import HeaderYS from './components/HeaderYS';
 import Dashboard from './components/Dashboard';
 import './css/main.css'; // Ensure this import is here
-import token from './token.js'; // Import the token from the token.js file
+import token from '../token.js'; // Import the token from the token.js file
 // Cesium Viewer Setting =================================================================
 import {IonResource, SceneMode, ImageryLayer, OpenStreetMapImageryProvider, SkyBox, WebMercatorProjection, ClockStep, ClockRange, HeadingPitchRoll, VelocityOrientationProperty, PathGraphics, DistanceDisplayCondition, CallbackProperty, TimeInterval, TimeIntervalCollection, SampledPositionProperty, JulianDate, Cartographic, Sun, ShadowMode, Color, Ellipsoid, Matrix4, Transforms, Cesium3DTileset, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";

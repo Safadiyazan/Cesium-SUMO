@@ -6,3 +6,4 @@ MIS/
 *.osm
 *.pbf
 *.gz
+token.js
