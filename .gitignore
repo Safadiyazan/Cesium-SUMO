@@ -1,7 +1,10 @@
 node_modules/
+simulations/sumo/
 dist/
 MIS/
 *.json
+!package.json
+!package-lock.json
 *.XML
 *.osm
 *.pbf

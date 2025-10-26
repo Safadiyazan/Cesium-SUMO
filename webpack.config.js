@@ -1,13 +1,13 @@
+const path = require('path');
 // The path to the CesiumJS source code
-const cesiumSource = 'node_modules/cesium/Source';
+const cesiumSource = path.resolve(__dirname, 'node_modules/cesium/Source');
 const cesiumWorkers = '../Build/Cesium/Workers';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    context: __dirname,
+    context: path.resolve(__dirname, 'frontend'),
     entry: {
         app: './src/index.js'
     },
@@ -64,6 +64,11 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: 'public', to: '' }, // Copy the entire 'public' folder to the root of the output directory
+            ],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, 'simulations/results/Outputs'), to: 'Outputs' },
             ],
         }),
     ],

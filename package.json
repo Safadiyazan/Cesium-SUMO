@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "npm-run-all --parallel start-frontend start-backend start-LAATSim",
+    "start": "npm-run-all --parallel start-frontend start-backend start-flask",
     "start-frontend": "webpack serve --config webpack.config.js --open",
-    "start-backend": "node server.js",
-    "start-LAATSim": "python ./src/pyScript.py"
+    "start-backend": "node ./backend/server.js",
+    "start-flask": "python ./simulations/pyScript.py"
   },
   "proxy": "http://localhost:1111",
   "author": "",
