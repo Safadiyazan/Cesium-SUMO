@@ -1582,7 +1582,7 @@ export async function LoadSimulation(viewer, data, dataSUMO1, dataSUMO2, dataSUM
     viewer.clock.startTime = startSim.clone();
     viewer.clock.stopTime = stopSim.clone();
     viewer.clock.currentTime = startSim.clone();
-    viewer.timeline.zoomTo(startSim, stopSim);
+//    viewer.timeline.zoomTo(startSim, stopSim);
     viewer.clock.multiplier = 1;
     viewer.clock.shouldAnimate = false;
     viewer.clock.clockRange = ClockRange.CLAMPED;
