@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LoadSimulation } from '../LoaderSimulation';
+import { loadSimulation } from '../simulation';
 
 const FileLoader = ({ viewer }) => {
     const [jsonFiles, setJsonFiles] = useState([]);
@@ -39,7 +39,7 @@ const FileLoader = ({ viewer }) => {
                 console.log("File 4 loaded:", selectedFile4);
                 console.log("City:", selectedCity);
 
-                LoadSimulation(viewer, data1, data2, data3, data4, selectedCity);
+                loadSimulation(viewer, data1, data2, data3, data4, selectedCity);
             })
             .catch(error => {
                 console.error('Error fetching simulation data:', error);
